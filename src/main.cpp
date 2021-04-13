@@ -1,37 +1,34 @@
-#include <Wire.h>
 #include <Arduino.h>
-#include "rgb_lcd.h"
+/* Sweep
+ by BARRAGAN <http://barraganstudio.com>
+ This example code is in the public domain.
  
-rgb_lcd lcd;
+ modified 8 Nov 2013
+ by Scott Fitzgerald
+ https://arduino.cc/en/Tutorial/Sweep
+*/
  
-const int colorR = 255;
-const int colorG = 255;
-const int colorB = 255;
+#include <Servo.h>
  
-void setup() 
-{
-  Serial.begin(9600);
-  rgb_lcd lcd;
-  // set up the LCD's number of columns and rows:
-  lcd.begin(16, 2);
-
-  lcd.setRGB(colorR, colorG, colorB);
-
-
-  // Print a message to the LCD.
-  lcd.print("hello, world!");
-
-  delay(1000);
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+ 
+int pos = 0;    // variable to store the servo position
+ 
+void setup() {
+  myservo.attach(15);  // attaches the servo on pin 5 to the servo object
 }
  
-void loop() 
-{
-  lcd.clear();
-  // set the cursor to column 0, line 1
-  // (note: line 1 is the second row, since counting begins with 0):
-  //lcd.setCursor(0, 1);
-  // print the number of seconds since reset:
-  lcd.print(millis()/1000);
-
-  delay(1000);
+void loop() {
+  for (pos = 0; pos <= 100; pos += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    myservo.write(pos); 
+    Serial.println(myservo.read());             // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
+  for (pos = 100; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+    myservo.write(pos);              // tell servo to go to position in variable 'pos'
+    Serial.println(myservo.read());
+    delay(15);                       // waits 15ms for the servo to reach the position
+  }
 }
