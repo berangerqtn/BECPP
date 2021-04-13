@@ -1,8 +1,11 @@
 #ifndef MYWEBSERVER_H
 #define MYWEBSERVER_H
 
+#include <Arduino.h>
 #include "ESP8266WiFi.h"
 #include "ESP8266WebServer.h"
+
+
 
 //Creation of WebServer object
 ESP8266WebServer WebServer(80);
@@ -38,11 +41,21 @@ const char index_html[] PROGMEM = R"=====(
         <button>Turn the LED ON</button>
         </a>
         <a href="/LED_OFF">
-            <button>Turn the LED OFF</button>
+        <button>Turn the LED OFF</button>
         </a>
     </body>
 </html>
 )=====";
+#else
 
+//Creation of WebServer object
+extern ESP8266WebServer WebServer;
+
+//Network ID
+extern const char* SSID;
+extern const char* MDP;
+
+//LED to drive
+extern int LED_STATE=0;
 
 #endif //MYWEBSERVER_H

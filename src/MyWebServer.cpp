@@ -1,4 +1,4 @@
-#include "MyWebServer.h"
+#include"MyWebServer.h"
 
 
 void setup_ESP(){
@@ -41,15 +41,15 @@ void LED_OFF(){
 void root(){
   String temp(reinterpret_cast<const __FlashStringHelper *>(index_html));
   if (digitalRead(16)==HIGH)
-    temp.replace("%LED%","LED Allumée");
+    temp.replace("%LED%","LED ON");
   else
-    temp.replace("%LED%","LED Allumée");
+    temp.replace("%LED%","LED OFF");
 
   WebServer.send(200, "text/html",index_html);
 }
 
 void onConnected(const WiFiEventStationModeConnected event){
-  Serial.println("Connecté au réseau WiFi");
+  Serial.println("Connected to WiFi Network");
 }
 
 void onGotIP(const WiFiEventStationModeGotIP event){
