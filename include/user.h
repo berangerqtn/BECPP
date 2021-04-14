@@ -29,8 +29,9 @@ public:
     void set_actual_grams();
     float get_actual_grams();
     void swap_users(user *ut);
-};
+    bool operator>(const user& right_user);  
 
+};
 
 void info::set_info(){
 
@@ -88,5 +89,10 @@ void user::swap_users(user *ut){
 float user::get_actual_grams(){
     return this->actual_grams;
 }
+
+bool user::operator>(const user& right_user){
+    if (get_actual_grams()>right_user.get_actual_grams()) {
+        return true;
+    }
 
 #endif //info_H
