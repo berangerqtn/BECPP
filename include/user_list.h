@@ -5,6 +5,7 @@
 #include <list>
 #include "user.h"
 
+
 using namespace std;
 
 class user_list {
@@ -13,6 +14,7 @@ class user_list {
     void add_user(user* user);
     void swap_user(int i, int j);
     void sort_list();
+    void print_list();
     private :
     list<user*> u_list = NULL;
     list<user*>::iterator it;

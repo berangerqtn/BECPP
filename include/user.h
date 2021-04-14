@@ -13,9 +13,9 @@ private:
 public:
     info();
     info(int w, int h);
-    int get_weight();
-    int get_height();
-    float get_IMC();
+    int get_weight() const;
+    int get_height() const;
+    float get_IMC() const;
     void set_IMC();
 };
 
@@ -28,9 +28,9 @@ private:
 public:
     user();
     void set_actual_user();
-    float get_actual_grams();
+    float get_actual_grams() const;
     void swap_users(user *ut);
-    bool operator>(user& right_user);  
+    bool operator>(const user& right_user);  
     
 
 };
@@ -44,7 +44,7 @@ void info::set_IMC(){
         this->IMC=this->weight/(float(this->height*this->height));
 }
 
-float user::get_actual_grams(){
+float user::get_actual_grams() const{
     return actual_grams;
 }
 
@@ -55,7 +55,9 @@ void user::swap_users(user *ut){
 }
 
 bool user::operator>(const user& right_user){
-    if (get_actual_grams()>right_user.get_actual_grams()) return true;
+    if (get_actual_grams()>right_user.get_actual_grams()) {
+        return true;
+    }
 }
 
 
