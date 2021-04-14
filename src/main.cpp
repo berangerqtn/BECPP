@@ -6,7 +6,7 @@
 #include "beer_tappping.h"
 
 
-info main_user{};
+user * main_user = new user;
 user_list user_list1;
 
 void setup() {
@@ -15,9 +15,10 @@ void setup() {
   setup_WebServer();
   digitalWrite(LED_BUILTIN,HIGH);
   Serial.begin(9600);
-
-  /*main_user.set_info();
-  user_list1.add_user(*main_user);*/
+  user_list1.add_user(main_user);
+  main_user->set_info();
+  
+  user_list1.print_list();
 }
 
 void loop(){
