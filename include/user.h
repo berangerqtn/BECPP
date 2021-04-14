@@ -4,41 +4,41 @@
 #include <iostream>
 using namespace std;
 
-class user {
+class info {
 
 private:
     int weight;
     int height;
     float IMC;
 public:
-    user();
-    user(int w, int h);
+    info();
+    info(int w, int h);
     int get_weight();
     int get_height();
     float get_IMC();
     void set_IMC();
 };
 
-class grams:user{
+class user:info{
 private:
-    float actual_grams;
+    float actual_user;
     int min_to_wait;
     int time;
 
 public:
-    grams();
-    void set_actual_grams();
+    user();
+    void set_actual_user();
 
 };
 
-user::user(){
+info::info(){
 
 }
 
-void user::set_IMC(){
+void info::set_IMC(){
     if (this->weight!=0)
         this->IMC=this->weight/(float(this->height*this->height));
 }
 
 
-#endif //USER_H
+#endif //info_H
