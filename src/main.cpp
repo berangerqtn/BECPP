@@ -1,37 +1,20 @@
-#include <Wire.h>
-#include <Arduino.h>
+#include "MyWebServer.h"
+#include "Arduino.h"
 #include "rgb_lcd.h"
- 
-rgb_lcd lcd;
- 
-const int colorR = 255;
-const int colorG = 255;
-const int colorB = 255;
- 
-void setup() 
-{
-  Serial.begin(9600);
-  rgb_lcd lcd;
-  // set up the LCD's number of columns and rows:
-  lcd.begin(16, 2);
+#include "user.h"
+#include "beer_tappping.h"
 
-  lcd.setRGB(colorR, colorG, colorB);
+void setup() {
+  // put your setup code here, to run once:
+  setup_ESP();
+  setup_WebServer();
+  digitalWrite(LED_BUILTIN,HIGH);
 
-
-  // Print a message to the LCD.
-  lcd.print("hello, world!");
-
-  delay(1000);
 }
- 
-void loop() 
-{
-  lcd.clear();
-  // set the cursor to column 0, line 1
-  // (note: line 1 is the second row, since counting begins with 0):
-  //lcd.setCursor(0, 1);
-  // print the number of seconds since reset:
-  lcd.print(millis()/1000);
 
-  delay(1000);
+void loop() {
+  // put your main code here, to run repeatedly:
+  if (WiFi.isConnected())
+    WebServer.handleClient();
+  touchButton();
 }
