@@ -12,9 +12,9 @@ protected:
     int height;
     float IMC;
 public:
-    int get_weight();
-    int get_height();
-    float get_IMC();
+    int get_weight() const;
+    int get_height() const;
+    float get_IMC() const;
     void set_info();
 };
 
@@ -27,8 +27,9 @@ protected:
 public:
     user();
     void set_actual_grams();
-    float get_actual_grams();
+    float get_actual_grams() const;
     void swap_users(user *ut);
+    void print_user();
     bool operator>(const user& right_user);  
 
 };
@@ -60,24 +61,26 @@ void info::set_info(){
         
     }
 
-    this->IMC=this->weight/(float(this->height*this->height));
+    this->IMC=this->weight/(float(this->height*this->height));    
+}
 
+int info::get_weight() const{
+    return this->weight;
+}
+
+int info::get_height() const{
+    return this->height;
+}
+
+float info::get_IMC() const{
+    return this->IMC;
+}
+
+void user::print_user(){
     Serial.println("Poids : " + this->get_weight());
     Serial.println("Taille : " + this->get_height());
     Serial.print("IMC : ");
     Serial.print( this->get_IMC());
-}
-
-int info::get_weight(){
-    return this->weight;
-}
-
-int info::get_height(){
-    return this->height;
-}
-
-float info::get_IMC(){
-    return this->IMC;
 }
 
 void user::swap_users(user *ut){
@@ -86,7 +89,7 @@ void user::swap_users(user *ut){
     *this=temp;
 }
 
-float user::get_actual_grams(){
+float user::get_actual_grams() const{
     return this->actual_grams;
 }
 
@@ -94,5 +97,5 @@ bool user::operator>(const user& right_user){
     if (get_actual_grams()>right_user.get_actual_grams()) {
         return true;
     }
-
+}
 #endif //info_H
