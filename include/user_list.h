@@ -21,7 +21,7 @@ class user_list {
 
     protected :
 
-}
+};
 
 
 
@@ -29,16 +29,21 @@ void user_list::add_user(user* user){
     u_list.push_back(user);
 }
 
-void user_list::swap_user(list<user*>::iterator it1, list<user*>::iterator it2){
+/*void user_list::swap_user(list<user*>::iterator it1, list<user*>::iterator it2){
     user * temp = u_list[it1];
     u_list[it1] = u_list[it2];
     u_list[it2] = temp;
+}*/
+void user_list::swap_user(list<user*>::iterator it1, list<user*>::iterator it2){
+    user * temp = *it1;
+    *it1 = *it2;
+    *it2 = temp;
 }
 
 void user_list::sort_list(){
-    for (it=u_list.begin(); it!= u_list.end()-1; it++){
-        if (*it > *(it+1)){
-            swap_user(it, it+1);
+    for (it=u_list.begin(); it!= u_list.end()--; it++){
+        if (*it > *(it++)){
+            swap_user(it, it++);
         }
     }
 }

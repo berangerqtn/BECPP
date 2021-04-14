@@ -97,5 +97,6 @@ bool user::operator>(const user& right_user){
     if (get_actual_grams()>right_user.get_actual_grams()) {
         return true;
     }
+    else{ return false;}
 }
 #endif //info_H
