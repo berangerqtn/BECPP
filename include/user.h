@@ -4,38 +4,46 @@
 #include <string>
 using namespace std;
 
-class info {
+class user {
 
 protected:
     string name;
     int weight;
     int height;
     float IMC;
+    float actual_grams;
+    int min_to_wait;
+    int time;
 public:
     int get_weight();
     int get_height();
     float get_IMC();
     void set_info();
-};
-
-class user:info{
-protected:
-    float actual_grams;
-    int min_to_wait;
-    int time;
-
-public:
-    user();
-    void set_actual_grams();
+    void set_actual_grams(float g);
     float get_actual_grams();
     void swap_users(user *ut);
-    bool operator>(const user& right_user);  
 
+    bool user::operator>(const user& right_user){;
 };
 
-void info::set_info(){
+class young:user{
+protected:
+    float max_grams;
+public:
+    bool canHeDrive();
+}
 
-    //Serial.println("Première initiale ?");
+class expert:user{
+protected:
+    float max_grams;
+public:
+    bool canHeDrive();
+
+}
+
+void user::set_info(){
+
+    //Serial.println("Première initiale ?"); //Gestion des noms si plusieurs utilisateurs
 
     Serial.println("Combien Pesez vous ?");
     while (digitalRead(16)!=1){
@@ -45,9 +53,7 @@ void info::set_info(){
     delay(1000);
 
     Serial.println("Voulez vous valider ce poids : " + this->weight);
-    while(digitalRead(16)!=1){
-
-    }
+    while(digitalRead(16)!=1){}
 
     Serial.println("Combien mesurez vous ?");
     while (digitalRead(16)!=1){
@@ -55,12 +61,15 @@ void info::set_info(){
     }
     this->weight=120+(analogRead(0)/10)/100;
 
+    delay(1000);
     Serial.println("Voulez vous valider cette taille : " + this->weight);
     while(digitalRead(16)!=1){
-        
+
     }
 
     this->IMC=this->weight/(float(this->height*this->height));
+
+    delay(1000);
 
     Serial.println("Poids : " + this->get_weight());
     Serial.println("Taille : " + this->get_height());
@@ -68,15 +77,15 @@ void info::set_info(){
     Serial.print( this->get_IMC());
 }
 
-int info::get_weight(){
+int user::get_weight(){
     return this->weight;
 }
 
-int info::get_height(){
+int user::get_height(){
     return this->height;
 }
 
-float info::get_IMC(){
+float user::get_IMC(){
     return this->IMC;
 }
 
@@ -94,5 +103,24 @@ bool user::operator>(const user& right_user){
     if (get_actual_grams()>right_user.get_actual_grams()) {
         return true;
     }
+}
+
+void user::set_actual_grams(float g){
+    this->actual_grams=g
+}
+
+bool young::canHeDrive(){
+    if (actual_grams>max_grams)
+        return false;
+    else
+        return true;
+}
+
+bool expert::canHeDrive(){
+    if (actual_grams>max_grams)
+        return false;
+    else
+        return true;
+}
 
 #endif //info_H
