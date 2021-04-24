@@ -5,7 +5,7 @@
 #include "beer_tappping.h"
 
 
-info main_user{};
+user main_user{};
 
 void setup() {
   // put your setup code here, to run once:

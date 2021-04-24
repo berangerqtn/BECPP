@@ -10,7 +10,6 @@ private:
 public:
     void set_degrees();
     void serve();
-
 };
 
 

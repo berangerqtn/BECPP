@@ -23,23 +23,23 @@ public:
     float get_actual_grams();
     void swap_users(user *ut);
 
-    bool user::operator>(const user& right_user){;
+    bool operator > (user& right_user);
 };
 
 class young:user{
 protected:
-    float max_grams;
+    const float max_grams;
 public:
     bool canHeDrive();
-}
+};
 
 class expert:user{
 protected:
-    float max_grams;
+    const float max_grams;
 public:
     bool canHeDrive();
 
-}
+};
 
 void user::set_info(){
 
@@ -99,14 +99,14 @@ float user::get_actual_grams(){
     return this->actual_grams;
 }
 
-bool user::operator>(const user& right_user){
-    if (get_actual_grams()>right_user.get_actual_grams()) {
+bool user::operator>(user& right_user){
+    if (this->get_actual_grams()>right_user.get_actual_grams()) {
         return true;
     }
 }
 
 void user::set_actual_grams(float g){
-    this->actual_grams=g
+    this->actual_grams=g;
 }
 
 bool young::canHeDrive(){
