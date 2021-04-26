@@ -9,14 +9,14 @@ class user {
 protected:
     string name;
     int weight;
-    int height;
+    float height;
     float IMC;
     float actual_grams;
     int min_to_wait;
     int time;
 public:
     int get_weight();
-    int get_height();
+    float get_height();
     float get_IMC();
     void set_info();
     void set_actual_grams(float g);
@@ -46,42 +46,44 @@ void user::set_info(){
     //Serial.println("Première initiale ?"); //Gestion des noms si plusieurs utilisateurs
 
     Serial.println("Combien Pesez vous ?");
-    while (digitalRead(16)!=1){
+    while (digitalRead(5)!=HIGH){
         Serial.println(40+(analogRead(0)/9));
+        yield();
     }
     this->weight=40+analogRead(0)/9;
-    delay(1000);
-
-    Serial.println("Voulez vous valider ce poids : " + this->weight);
-    while(digitalRead(16)!=1){}
+    delay(200);
+    Serial.println("Voulez pesez  : " + this->weight);
+    delay(2000);
+    //while(digitalRead(5)!=HIGH){}
+    
 
     Serial.println("Combien mesurez vous ?");
-    while (digitalRead(16)!=1){
+    while (digitalRead(5)!=HIGH){
         Serial.println(120+(analogRead(0)/10));
+        yield();
     }
-    this->weight=120+(analogRead(0)/10)/100;
+    this->height=1.2+(analogRead(0)/10)/100.0;
+    delay(200);
+    Serial.println("Voulez mesurez : " + this->weight);
+    delay(2000);
+    //while(digitalRead(5)!=HIGH){}
 
-    delay(1000);
-    Serial.println("Voulez vous valider cette taille : " + this->weight);
-    while(digitalRead(16)!=1){
+    this->IMC=this->weight/((this->height)*(this->height));
+    Serial.println("Vous avez un IMC de : " + String(this->IMC));
 
-    }
+    delay(2000);
 
-    this->IMC=this->weight/(float(this->height*this->height));
-
-    delay(1000);
-
-    Serial.println("Poids : " + this->get_weight());
-    Serial.println("Taille : " + this->get_height());
-    Serial.print("IMC : ");
-    Serial.print( this->get_IMC());
+    Serial.println("BILAN UTILISATEUR");
+    Serial.println("Poids : " + String(this->get_weight()));
+    Serial.println("Taille : " + String(this->get_height()));
+    Serial.println("IMC : "+ String(this->get_IMC()));
 }
 
 int user::get_weight(){
     return this->weight;
 }
 
-int user::get_height(){
+float user::get_height(){
     return this->height;
 }
 
@@ -103,6 +105,7 @@ bool user::operator>(user& right_user){
     if (this->get_actual_grams()>right_user.get_actual_grams()) {
         return true;
     }
+    else return false;
 }
 
 void user::set_actual_grams(float g){
