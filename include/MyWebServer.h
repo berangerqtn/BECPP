@@ -52,11 +52,10 @@ const char index_html[] PROGMEM = R"=====(
 
 void setup_ESP(){
       // put your setup code here, to run once:
-  Serial.begin(115200);
+  digitalWrite(LED_BUILTIN,HIGH);
+  Serial.begin(9600);
   Serial.println("");
-  pinMode(16,OUTPUT);
-  digitalWrite(16,HIGH);
-  
+  pinMode(5,INPUT);  
 }
 
 void setup_WebServer(){
