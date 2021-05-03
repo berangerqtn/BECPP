@@ -1,24 +1,20 @@
 #include "MyWebServer.h"
-#include "Arduino.h"
-#include "rgb_lcd.h"
-#include "user.h"
-#include "beer_tappping.h"
+//#include "rgb_lcd.h"
+//#include "user.h"
+//#include "beer_tappping.h"
+#include "menu.h"
 
 
-user main_user{};
+menu main_menu;
 
 void setup() {
-  // put your setup code here, to run once:
   setup_ESP();
-  setup_WebServer();
-  
-
-  main_user.set_info();
-  
+  setup_WebServer();  
 }
 
 void loop() {
 
+  main_menu.menu_display();
   // put your main code here, to run repeatedly:
   //if (WiFi.isConnected())
    // WebServer.handleClient();

@@ -12,13 +12,13 @@ class user_list {
     public : 
     user_list();
     void add_user(user* user);
-    void swap_user(int i, int j);
+    void swap_user(list<user*>::iterator it1, list<user*>::iterator it2);
     void sort_list();
     void print_list();
-    private :
-    list<user*> u_list = NULL;
-    list<user*>::iterator it;
 
+    private :
+        list<user*> u_list = NULL;
+        list<user*>::iterator it;
     protected :
 
 }
