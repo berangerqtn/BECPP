@@ -24,6 +24,8 @@ protected:
 public:
     user(char initial0, char initial1, int pweight, float pheight);
     
+    char get_i0();
+    char get_i1();
     int get_weight();
     float get_height();
     float get_IMC();
@@ -83,23 +85,37 @@ user::user(char initial0, char initial1, int pweight, float pheight){
     nbUser++;
 }
 
-class young:user{
+class young:public user{
 protected:
-    const float max_grams;
+    const float max_grams = 0.25;
 public:
     bool canHeDrive();
+    young(char initial0, char initial1, int pweight, float pheight);
 };
 
-class expert:user{
+young::young(char initial0, char initial1, int pweight, float pheight):user(initial0, initial1, pweight, pheight){}
+
+class expert:public user{
 protected:
-    const float max_grams;
+    const float max_grams = 0.5;
 public:
     bool canHeDrive();
+    expert(char initial0, char initial1, int pweight, float pheight);
 
 };
+
+expert::expert(char initial0, char initial1, int pweight, float pheight):user(initial0, initial1, pweight, pheight){}
 
 int user::get_weight(){
     return this->weight;
+}
+
+char user::get_i0(){
+    return i0;
+}
+
+char user::get_i1(){
+    return i1;
 }
 
 float user::get_height(){

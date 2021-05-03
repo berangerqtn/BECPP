@@ -10,6 +10,7 @@ protected :
     std::map<int,String> m0; //Premier niveau de menu
     std::map<int,String> m1; //Sous menu de Consommation
     list<user> l_user;
+    list<user>::iterator it;
 
     int m_level;
 
@@ -51,12 +52,31 @@ void menu::menu_display(){
 
         if (analogRead(0)<1024/3){
             //ADD USERS
-            user newUser(set_i0(), set_i1(), set_weight(), set_height());
-            l_user.push_back(newUser);
+            Serial.println("Quel âge avez vous ?");
+            while (digitalRead(Push)!=HIGH){
+                Serial.println(18+analogRead(Pot)/13);
+                yield();
+            }
+            if (18+analogRead(Pot)/13<22){
+                young newUser(set_i0(), set_i1(), set_weight(), set_height());
+                l_user.push_back(newUser);
+            }
+            else{
+                expert newUser(set_i0(), set_i1(), set_weight(), set_height());
+                l_user.push_back(newUser);
+            }
+            
+
         }
         else if (1024/3<analogRead(0) && analogRead(0)<1024*2/3){
             //SEE USERS
+            it=l_user.begin();
+            while (it!=l_user.end()){
+                Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
+                it++;
+            }
             
+             
 
         }
 
