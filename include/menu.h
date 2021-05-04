@@ -42,7 +42,7 @@ void menu::menu_display(){
             if (analogRead(Pot)<1024/3)
                 Serial.println(m0[0]);
 
-            else if (analogRead(Pot))
+            else if (1024/3<analogRead(Pot) && analogRead(Pot)<1024*2/3)
                 Serial.println(m0[1]);
 
             else
@@ -66,7 +66,6 @@ void menu::menu_display(){
                 l_user.push_back(newUser);
             }
             
-
         }
         else if (1024/3<analogRead(0) && analogRead(0)<1024*2/3){
             //SEE USERS
@@ -76,22 +75,29 @@ void menu::menu_display(){
                 it++;
             }
             
-             
-
         }
 
         else {
             //Consommer
+            m_level=1;
         }
-
         
     }
-    else if (m_level==1){
-        Serial.println("On est au niveau 1");
+    
+    //GESTION DE LA CONSOMMATION
+    else if (m_level==1){  
 
-        if (digitalRead(Push)==HIGH){
+        while(digitalRead(Push)!=HIGH){
+            if (analogRead(Pot)<1024/2)
+                Serial.println(m1[0]); //Sélection USER
+            else
+                Serial.println(m1[1]);//Retour
+        }
+        if (analogRead(Pot)<1024/2){
+            //A COMPLETER 
+        }
+        else{
             m_level=0;
-            delay(200);
         }
     }
 }
