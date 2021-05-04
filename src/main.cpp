@@ -1,7 +1,4 @@
 #include "MyWebServer.h"
-//#include "rgb_lcd.h"
-//#include "user.h"
-//#include "beer_tappping.h"
 #include "menu.h"
 
 

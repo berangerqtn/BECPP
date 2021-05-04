@@ -3,7 +3,10 @@
 
 #include <map>
 #include <list>
+#include "rgb_lcd.h"
 #include "user.h"
+
+rgb_lcd lcd;
 
 class menu{
 protected :
@@ -47,7 +50,6 @@ void menu::menu_display(){
 
             else
                 Serial.println(m0[2]);
-
         }
 
         if (analogRead(0)<1024/3){
