@@ -94,7 +94,7 @@ void menu::menu_display(){
                 Serial.println(m1[1]);//Retour
         }
         if (analogRead(Pot)<1024/2){
-            //A COMPLETER 
+            //A COMPLETER Selection Utilisateur qui consomme.
         }
         else{
             m_level=0;
