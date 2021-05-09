@@ -35,6 +35,7 @@ menu::menu(){
 
     m1[0]="Sélection Utilisateur";
     m1[1]="Retour";
+    m_level=0;
 }
 
 void menu::menu_display(){
