@@ -1,6 +1,9 @@
 #ifndef USER_H
 #define USER_H
 #include <Arduino.h>
+#include "rgb_lcd.h"
+
+//rgb_lcd lcd;
 
 int Push = 5;
 int Pot = 0;
@@ -39,37 +42,37 @@ public:
 
 void user::set_info(){
 
-    Serial.println("Combien Pesez vous ?");
+    //lcd.print("Combien Pesez vous ?");
     while (digitalRead(Push)!=HIGH){
-        Serial.println(40+(analogRead(0)/9));
+        //lcd.print(40+(analogRead(0)/9));
         yield();
     }
     this->weight=40+analogRead(0)/9;
     delay(200);
-    Serial.println("Voulez pesez  : " + this->weight);
+    //lcd.print("Voulez pesez  : " + this->weight);
     delay(2000);
     
 
-    Serial.println("Combien mesurez vous ?");
+    //lcd.print("Combien mesurez vous ?");
     while (digitalRead(Push)!=HIGH){
-        Serial.println(120+(analogRead(0)/10));
+        //lcd.print(120+(analogRead(0)/10));
         yield();
     }
     this->height=1.2+(analogRead(0)/10)/100.0;
     delay(200);
-    Serial.println("Voulez mesurez : " + this->weight);
+    //lcd.print("Voulez mesurez : " + this->weight);
     delay(2000);
 
 
     this->IMC=this->weight/((this->height)*(this->height));
-    Serial.println("Vous avez un IMC de : " + String(this->IMC));
+    //lcd.print("Vous avez un IMC de : " + String(this->IMC));
 
     delay(2000);
 
-    Serial.println("BILAN UTILISATEUR");
-    Serial.println("Poids : " + String(this->get_weight()));
-    Serial.println("Taille : " + String(this->get_height()));
-    Serial.println("IMC : "+ String(this->get_IMC()));
+    //lcd.print("BILAN UTILISATEUR");
+    //lcd.print("Poids : " + String(this->get_weight()));
+    //lcd.print("Taille : " + String(this->get_height()));
+    //lcd.print("IMC : "+ String(this->get_IMC()));
     nbUser++;
 }
 

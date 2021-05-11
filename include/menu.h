@@ -6,8 +6,6 @@
 #include "rgb_lcd.h"
 #include "user.h"
 
-rgb_lcd lcd;
-
 class menu{
 protected :
     std::map<int,String> m0; //Premier niveau de menu
@@ -24,8 +22,9 @@ public :
     char set_i1();
     int set_weight();
     float set_height();
-
+    rgb_lcd lcd;
     menu();
+    void menu_init();
 };
 
 menu::menu(){
@@ -40,26 +39,35 @@ menu::menu(){
 
 void menu::menu_display(){
     if (m_level==0){
-        Serial.println("On est au niveau 0");
+        //Serial.println("On est au niveau 0");
         
         while(digitalRead(Push)!=HIGH){
-            if (analogRead(Pot)<1024/3)
+            lcd.clear();
+            if (analogRead(Pot)<1024/3){
                 Serial.println(m0[0]);
-
-            else if (1024/3<analogRead(Pot) && analogRead(Pot)<1024*2/3)
+                Serial.println(m0[0]);
+            }
+            else if (1024/3<analogRead(Pot) && analogRead(Pot)<1024*2/3){
                 Serial.println(m0[1]);
-
-            else
+                Serial.println(m0[1]);
+            }
+            else{
                 Serial.println(m0[2]);
+                Serial.println(m0[2]);
+            }
         }
+        delay(200);
 
         if (analogRead(0)<1024/3){
             //ADD USERS
             Serial.println("Quel âge avez vous ?");
+            Serial.println("Quel age avez vous ?");
             while (digitalRead(Push)!=HIGH){
+                Serial.println(18+analogRead(Pot)/13);
                 Serial.println(18+analogRead(Pot)/13);
                 yield();
             }
+            delay(200);
             if (18+analogRead(Pot)/13<22){
                 young newUser(set_i0(), set_i1(), set_weight(), set_height());
                 l_user.push_back(newUser);
@@ -74,9 +82,13 @@ void menu::menu_display(){
             //SEE USERS
             it=l_user.begin();
             while (it!=l_user.end()){
-                Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
+                //Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
+                Serial.println((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
+                while(digitalRead(Push)!=HIGH){}
+                delay(200);
                 it++;
             }
+
             
         }
 
@@ -91,6 +103,7 @@ void menu::menu_display(){
     else if (m_level==1){  
 
         while(digitalRead(Push)!=HIGH){
+            lcd.clear();
             if (analogRead(Pot)<1024/2)
                 Serial.println(m1[0]); //Sélection USER
             else
@@ -106,39 +119,61 @@ void menu::menu_display(){
 }
 
 char menu::set_i0(){
+    lcd.clear();
     Serial.println("Première initiale");
     while (digitalRead(Push)!=HIGH){
+        lcd.clear();
         Serial.println(65+analogRead(0)/39);
         yield();
     }
+    delay(200);
     return 65+analogRead(0)/39;
 }
 
 char menu::set_i1(){
+    lcd.clear();
     Serial.println("Deuxième initiale");
     while (digitalRead(Push)!=HIGH){
+        lcd.clear();
         Serial.println(65+analogRead(0)/39);
         yield();
     }
+    delay(200);
     return 65+analogRead(0)/39;
 }
 
 int menu::set_weight(){
-    Serial.println("Combien Pesez vous ?");
+    lcd.clear();
+    Serial.println("Cmb Pesez vous ?");
     while (digitalRead(Push)!=HIGH){
+        lcd.clear();
         Serial.println(40+(analogRead(0)/9));
         yield();
     }
+    delay(200);
     return 40+analogRead(0)/9;
 }
 
 float menu::set_height(){
-    Serial.println("Combien mesurez vous ?");
+    lcd.clear();
+    Serial.println("Cmb mesurez vous ?");
     while (digitalRead(Push)!=HIGH){
+        lcd.clear();
         Serial.println(120+(analogRead(0)/10));
         yield();
     }
+    delay(200);
     return 1.2+(analogRead(0)/10)/100.0;
+}
+
+void menu::menu_init(){
+    rgb_lcd lcd;
+    lcd.begin(16,2);
+    lcd.setRGB(255,0,0);
+    lcd.clear();
+    Serial.println("blzblz");
+    Serial.print("hello");
+    delay(3000);
 }
 
 
