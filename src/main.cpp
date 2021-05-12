@@ -11,6 +11,9 @@ void setup() {
   setup_ESP();
   setup_WebServer();
   main_menu.menu_init();
+  expert newUser('F', 'U', 193, 1.45);
+  main_menu.add_to_list(newUser);
+
 }
 
 void loop() {

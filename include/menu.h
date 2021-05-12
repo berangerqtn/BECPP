@@ -25,6 +25,9 @@ public :
     rgb_lcd lcd;
     menu();
     void menu_init();
+    list<user> get_list();
+    void add_to_list(user newU);
+
 };
 
 menu::menu(){
@@ -36,6 +39,15 @@ menu::menu(){
     m1[1]="Retour";
     m_level=0;
 }
+
+list<user> menu::get_list(){
+    return l_user;
+}
+
+void menu::add_to_list(user newU){
+    l_user.push_back(newU);
+}
+
 
 void menu::menu_display(){
     if (m_level==0){
