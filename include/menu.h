@@ -6,6 +6,8 @@
 #include "rgb_lcd.h"
 #include "user.h"
 
+#define DOSE 10.0
+
 class menu{
 protected :
     std::map<int,String> m0; //Premier niveau de menu
@@ -99,7 +101,7 @@ void menu::menu_display(){
             while (it!=l_user.end()){
                 //Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
                 Serial.println((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
-                Serial.print((*it).get_actual_grams());
+                Serial.println((*it).get_actual_grams());
                 while(digitalRead(Push)!=HIGH){yield();}
                 delay(200);
                 it++;
@@ -107,7 +109,6 @@ void menu::menu_display(){
         }
 
         else {
-            //Consommer
             m_level=1;
         }
         
@@ -123,10 +124,41 @@ void menu::menu_display(){
             else
                 Serial.println(m1[1]);//Retour
         }
+
+
         if (analogRead(Pot)<1024/2){
             //A COMPLETER Selection Utilisateur qui consomme.
+            it = l_user.begin();
+            while (digitalRead(Push)!=HIGH){
+                yield();
+                
+                if (analogRead(Pot)<1024/3 && it!= l_user.begin()){
+                    Serial.println((*it).get_i0() + (*it).get_i1());
+                    Serial.println("Prev. User");
+                }
+                else if (analogRead(Pot)> 2*1024/3 && it != l_user.end()){
+                    Serial.println((*it).get_i0() + (*it).get_i1());
+                    Serial.println("Next User");
+
+                }
+                else{
+                    Serial.println((*it).get_i0() + (*it).get_i1());
+                    Serial.println("This User");
+                }
+            }
+            if (analogRead(Pot)<1024/3){
+                it--;
+            }
+            else if (analogRead(Pot)>2*1024/3){
+                it++;
+            }
+            else {
+                (*it).add_grams(DOSE);
+            }
+            
         }
         else{
+            //RETOUR à m0
             m_level=0;
         }
     }
@@ -189,6 +221,4 @@ void menu::menu_init(){
     Serial.print("hello");
     delay(3000);
 }
-
-
 #endif

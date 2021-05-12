@@ -32,7 +32,7 @@ public:
     int get_weight();
     float get_height();
     float get_IMC();
-    void set_actual_grams(float g);
+    void add_grams(float g);
     float get_actual_grams();
     void swap_users(user *ut);
     void set_info();
@@ -146,8 +146,8 @@ bool user::operator>(user& right_user){
     else return false;
 }
 
-void user::set_actual_grams(float g){
-    this->actual_grams=g;
+void user::add_grams(float g){
+    this->actual_grams+=g;
 }
 
 bool young::canHeDrive(){
