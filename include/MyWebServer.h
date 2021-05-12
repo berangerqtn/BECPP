@@ -20,7 +20,10 @@ ESP8266WebServer WebServer(80);
 const char* SSID ="DJZier";
 const char* MDP ="flolpb64";
 
-list<user> myList = menu::get_list();
+menu main_menu;
+list<user> myList = main_menu.get_list();
+int i = 1;
+
 
 //LED to drive
 int LED_STATE=0;
@@ -98,11 +101,32 @@ void setup_WebServer(){
 }
 
 void afficherListe(){
-  list<user>::iterator it = myList.begin();
+  myList = main_menu.get_list();
+  list<user>::iterator it ;
   String texte_remp;
+  String toReplace;
   
-  texte_remp = "personne 1 actual gram :" + (String)(*it).get_actual_grams();
+  for (it = myList.begin(); it!= myList.end(); it++){
+    toReplace = "%personne " + (String)i +"%";
+    texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
+    temp.replace(toReplace, texte_remp);
+    i=i+1;
+  }
+  i=1;
+  
+  /*texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
   temp.replace("%personne 1%", texte_remp);
+  it++;
+  texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
+  temp.replace("%personne 2%", texte_remp);
+  it++;
+  texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
+  temp.replace("%personne 3%", texte_remp);
+  it++;
+  texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
+  temp.replace("%personne 4%", texte_remp);*/
+
+
   
   WebServer.send(200, "text/html",temp);
 }
