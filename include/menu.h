@@ -9,21 +9,25 @@
 rgb_lcd lcd;
 
 class menu{
+    
 protected :
     std::map<int,String> m0; //Premier niveau de menu
     std::map<int,String> m1; //Sous menu de Consommation
-    list<user> l_user;
+    
     list<user>::iterator it;
 
     int m_level;
 
 public :
     void menu_display();
+    static list<user> l_user;
 
     char set_i0();
     char set_i1();
     int set_weight();
     float set_height();
+    list<user> get_list(){return l_user;}
+    void addPlayer(user u);
 
     menu();
 };
@@ -140,6 +144,10 @@ float menu::set_height(){
         yield();
     }
     return 1.2+(analogRead(0)/10)/100.0;
+}
+
+void menu::addPlayer(user u){
+    l_user.push_back(u);
 }
 
 
