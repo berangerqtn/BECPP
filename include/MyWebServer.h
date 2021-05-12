@@ -20,7 +20,7 @@ ESP8266WebServer WebServer(80);
 const char* SSID ="DJZier";
 const char* MDP ="flolpb64";
 
-list<user>& myList = menu::l_user;
+list<user> myList = menu::get_list();
 
 //LED to drive
 int LED_STATE=0;

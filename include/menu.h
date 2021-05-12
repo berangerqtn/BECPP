@@ -13,15 +13,13 @@ class menu{
 protected :
     std::map<int,String> m0; //Premier niveau de menu
     std::map<int,String> m1; //Sous menu de Consommation
-    
+    list<user> l_user;
     list<user>::iterator it;
 
     int m_level;
 
 public :
     void menu_display();
-    static list<user> l_user;
-
     char set_i0();
     char set_i1();
     int set_weight();
