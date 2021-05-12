@@ -71,10 +71,13 @@ void menu::menu_display(){
             if (18+analogRead(Pot)/13<22){
                 young newUser(set_i0(), set_i1(), set_weight(), set_height());
                 l_user.push_back(newUser);
+                Serial.print("User cree");
             }
             else{
                 expert newUser(set_i0(), set_i1(), set_weight(), set_height());
                 l_user.push_back(newUser);
+                Serial.print("User cree");
+
             }
             
         }
@@ -84,12 +87,11 @@ void menu::menu_display(){
             while (it!=l_user.end()){
                 //Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
                 Serial.println((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
-                while(digitalRead(Push)!=HIGH){}
+                Serial.print((*it).get_actual_grams());
+                while(digitalRead(Push)!=HIGH){yield();}
                 delay(200);
                 it++;
             }
-
-            
         }
 
         else {
@@ -123,11 +125,11 @@ char menu::set_i0(){
     Serial.println("Première initiale");
     while (digitalRead(Push)!=HIGH){
         lcd.clear();
-        Serial.println(65+analogRead(0)/39);
+        Serial.println(char(65+analogRead(0)/39));
         yield();
     }
     delay(200);
-    return 65+analogRead(0)/39;
+    return char(65+analogRead(0)/39);
 }
 
 char menu::set_i1(){
@@ -135,11 +137,11 @@ char menu::set_i1(){
     Serial.println("Deuxième initiale");
     while (digitalRead(Push)!=HIGH){
         lcd.clear();
-        Serial.println(65+analogRead(0)/39);
+        Serial.println(char(65+analogRead(0)/39));
         yield();
     }
     delay(200);
-    return 65+analogRead(0)/39;
+    return char(65+analogRead(0)/39);
 }
 
 int menu::set_weight(){

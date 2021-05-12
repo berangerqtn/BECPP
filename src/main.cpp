@@ -4,16 +4,17 @@
 // Faire Ctrl+H dans le menu.h pour remplacer tous les Serial.println par lcd.print
 
 rgb_lcd lcd;
+menu main_menu;  
+
 
 void setup() {
   setup_ESP();
   setup_WebServer();
-  menu main_menu;  
   main_menu.menu_init();
-  main_menu.menu_display();
 }
 
 void loop() {
+  main_menu.menu_display(); 
   // put your main code here, to run repeatedly:
   //if (WiFi.isConnected())
    // WebServer.handleClient();
