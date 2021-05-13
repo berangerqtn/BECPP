@@ -17,8 +17,11 @@
 ESP8266WebServer WebServer(80);
 
 //Network ID
-const char* SSID ="DJZier";
-const char* MDP ="flolpb64";
+/*const char* SSID ="DJZier";
+const char* MDP ="flolpb64";*/
+
+const char* SSID ="Livebox-C4A6";
+const char* MDP ="lulukiki";
 
 menu main_menu;
 list<user> myList = main_menu.get_list();
