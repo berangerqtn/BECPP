@@ -24,7 +24,7 @@ public :
     char set_i1();
     int set_weight();
     float set_height();
-    int set_sexe();
+    char set_sexe();
     list<user*> get_list(){return l_user;}
     void addPlayer(user& u);
 
@@ -135,13 +135,20 @@ int menu::set_weight(){
     }
     return 40+analogRead(0)/9;
 }
-int menu::set_sexe(){
+char menu::set_sexe(){
     Serial.println("Quel est votre sexe ?");
     while (digitalRead(Push)!=HIGH){
-        Serial.println(40+(analogRead(0)/9));
-        yield();
+        if (analogRead(Pot)<1024/2){
+            Serial.println("Homme");
+        }
+        else{
+            Serial.println("Femme");
+        }
     }
-    return 40+analogRead(0)/9;
+    if (analogRead(Pot)<1024/2)
+        return 'h';
+    else
+        return 'f';
 }
 
 float menu::set_height(){
