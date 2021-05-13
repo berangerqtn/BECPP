@@ -9,28 +9,33 @@
 #define DOSE 10.0
 
 class menu{
+    
 protected :
     std::map<int,String> m0; //Premier niveau de menu
     std::map<int,String> m1; //Sous menu de Consommation
-    list<user> l_user;
-    list<user>::iterator it;
+    list<user*> l_user;
+    list<user*>::iterator it;
 
     int m_level;
 
 public :
     void menu_display();
-
     char set_i0();
     char set_i1();
     int set_weight();
     float set_height();
     rgb_lcd lcd;
+    char set_sexe();
+    list<user*> get_list(){return l_user;}
+    void addPlayer(user& u);
+
     menu();
     void menu_init();
     list<user> get_list();
     void add_to_list(user newU);
 
 };
+
 
 menu::menu(){
     m0[0]= "Ajouter un joueur";
@@ -83,14 +88,14 @@ void menu::menu_display(){
             }
             delay(200);
             if (18+analogRead(Pot)/13<22){
-                young newUser(set_i0(), set_i1(), set_weight(), set_height());
-                l_user.push_back(newUser);
-                Serial.print("User cree");
+                young newUser(set_i0(), set_i1(), set_weight(), set_height(), set_sexe());
+                l_user.push_back(&newUser);
+                Serial.print("User Créé");
             }
             else{
-                expert newUser(set_i0(), set_i1(), set_weight(), set_height());
-                l_user.push_back(newUser);
-                Serial.print("User cree");
+                expert newUser(set_i0(), set_i1(), set_weight(), set_height(), set_sexe());
+                l_user.push_back(&newUser);
+                Serial.print("User Créé");
 
             }
             
@@ -202,6 +207,21 @@ int menu::set_weight(){
     delay(200);
     return 40+analogRead(0)/9;
 }
+char menu::set_sexe(){
+    Serial.println("Quel est votre sexe ?");
+    while (digitalRead(Push)!=HIGH){
+        if (analogRead(Pot)<1024/2){
+            Serial.println("Homme");
+        }
+        else{
+            Serial.println("Femme");
+        }
+    }
+    if (analogRead(Pot)<1024/2)
+        return 'h';
+    else
+        return 'f';
+}
 
 float menu::set_height(){
     lcd.clear();
@@ -224,4 +244,9 @@ void menu::menu_init(){
     Serial.print("hello");
     delay(3000);
 }
+
+void menu::addPlayer(user& u){
+    l_user.push_back(&u);
+}
+
 #endif
