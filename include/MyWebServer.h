@@ -13,6 +13,8 @@
 
 //using namespace std;
 
+//source info alcool : https://www.stagespointspermis.fr/656-l-points-de-permis-temps-elimination-alcool.html
+
 //Creation of WebServer object
 ESP8266WebServer WebServer(80);
 
@@ -40,6 +42,7 @@ void LED_OFF();
 void onGotIP(const WiFiEventStationModeGotIP event);
 void onConnected(const WiFiEventStationModeConnected event);
 void touchButton();
+void computeGrams();
 
 
 
@@ -108,7 +111,7 @@ void afficherListe(){
   list<user*>::iterator it ;
   String texte_remp;
   String toReplace;
-  
+  computeGrams();
   for (it = myList.begin(); it!= myList.end(); it++){
     toReplace = "%personne " + (String)i +"%";
     texte_remp = (String)(*it)->get_i0() + " " + (String)(*it)->get_i1() + " actual gram :" + (String)(*it)->get_actual_grams();
@@ -161,6 +164,23 @@ void touchButton(){
   if (digitalRead(0)==HIGH)
     Serial.println("You pushed");
     delay(200);
+}
+
+
+void computeGrams(){
+  list<user*>::iterator it ;
+  myList = main_menu.get_list();
+  for (it = myList.begin(); it!= myList.end(); it++){
+    if ((*it)->get_sexe() == 'f'){
+      //(*it)->set_actual_grams((*it)->get_actual_grams()-0.085*(millis()-(*it)->get_time())/3600000);
+      (*it)->set_actual_grams((*it)->get_actual_grams()+0.01);
+    }
+    else if ((*it)->get_sexe() == 'h'){
+      (*it)->set_actual_grams((*it)->get_actual_grams()-(0.1*(millis()-(*it)->get_time())/3600000));
+    }
+    
+    (*it)->set_time(millis());
+  }
 }
 
 #endif //MYWEBSERVER_H

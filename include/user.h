@@ -24,20 +24,29 @@ protected:
     float actual_grams;
     int min_to_wait;
 
+    unsigned long time;
+
 public:
     user(char initial0, char initial1, int pweight, float pheight, char psexe);
     
+    //getters
     char get_i0();
     char get_i1();
     int get_weight();
     float get_height();
     float get_IMC();
-    void set_actual_grams(float g);
     float get_actual_grams();
-    void swap_users(user *ut);
-    void set_info();
-    void addConso();
+    char get_sexe(){return sexe;};
+    unsigned long get_time(){return time;};
 
+    //setters
+    void set_actual_grams(float g);
+    void set_info();
+    void set_time(unsigned long mTime);
+
+    //methods
+    void swap_users(user *ut);    
+    void addConso();
     bool operator > (user& right_user);
 };
 
@@ -88,6 +97,9 @@ user::user(char initial0, char initial1, int pweight, float pheight, char psexe)
 
     this->min_to_wait=0;
     this->actual_grams=0;
+
+    time = millis();
+
     nbUser++;
 }
 
@@ -173,8 +185,13 @@ void user::addConso(){
     }
     else if (sexe == 'h'){
         actual_grams = actual_grams + 10/(weight*0.7);
-    }
-    
+    }    
 }
+
+void user::set_time(unsigned long mTime){
+    time = mTime;
+}
+
+
 
 #endif //info_H

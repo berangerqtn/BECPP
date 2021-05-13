@@ -2,6 +2,8 @@
 #include "menu.h"
 
 // A toi de modifier Flo !
+
+
 //menu main_menu;
 user user1('f','c',80,1.75,'h');
 user user2('b','q',90,1.90,'h');
@@ -21,6 +23,7 @@ void setup() {
   user2.addConso();
   //user2.addConso();
   user3.addConso();
+  user4.set_actual_grams(100);
   
 }
 
@@ -33,12 +36,14 @@ void loop() {
     Serial.println("connecté");
     Serial.println("IP : ");
     Serial.println(WiFi.localIP());
+    computeGrams();
     WebServer.handleClient(); //prend en charge les clients qui peuvent venir sur mon serveur
   } else {
     digitalWrite(PIN_LED_WIFI_CONNECTED, LOW);
     Serial.println("non connecté");
   }
-  
+  //WebServer.on("/afficher_liste", afficherListe);
    // WebServer.handleClient();
+   //computeGrams();
 
 }
