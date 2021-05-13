@@ -24,6 +24,7 @@ public :
     char set_i1();
     int set_weight();
     float set_height();
+    int set_sexe();
     list<user*> get_list(){return l_user;}
     void addPlayer(user& u);
 
@@ -64,11 +65,11 @@ void menu::menu_display(){
                 yield();
             }
             if (18+analogRead(Pot)/13<22){
-                young newUser(set_i0(), set_i1(), set_weight(), set_height());
+                young newUser(set_i0(), set_i1(), set_weight(), set_height(), set_sexe());
                 l_user.push_back(&newUser);
             }
             else{
-                expert newUser(set_i0(), set_i1(), set_weight(), set_height());
+                expert newUser(set_i0(), set_i1(), set_weight(), set_height(), set_sexe());
                 l_user.push_back(&newUser);
             }
             
@@ -128,6 +129,14 @@ char menu::set_i1(){
 
 int menu::set_weight(){
     Serial.println("Combien Pesez vous ?");
+    while (digitalRead(Push)!=HIGH){
+        Serial.println(40+(analogRead(0)/9));
+        yield();
+    }
+    return 40+analogRead(0)/9;
+}
+int menu::set_sexe(){
+    Serial.println("Quel est votre sexe ?");
     while (digitalRead(Push)!=HIGH){
         Serial.println(40+(analogRead(0)/9));
         yield();

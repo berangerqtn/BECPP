@@ -1,6 +1,7 @@
 #ifndef USER_H
 #define USER_H
 #include <Arduino.h>
+#include <string>
 
 int Push = 5;
 int Pot = 0;
@@ -13,16 +14,18 @@ class user {
 protected:
     char i0;
     char i1;
+    char sexe;
 
     int weight;
     float height;
     float IMC;
 
+
     float actual_grams;
     int min_to_wait;
 
 public:
-    user(char initial0, char initial1, int pweight, float pheight);
+    user(char initial0, char initial1, int pweight, float pheight, char psexe);
     
     char get_i0();
     char get_i1();
@@ -33,6 +36,7 @@ public:
     float get_actual_grams();
     void swap_users(user *ut);
     void set_info();
+    void addConso();
 
     bool operator > (user& right_user);
 };
@@ -73,12 +77,14 @@ void user::set_info(){
     nbUser++;
 }
 
-user::user(char initial0, char initial1, int pweight, float pheight){
+user::user(char initial0, char initial1, int pweight, float pheight, char psexe){
     this->i0=initial0;
     this->i1=initial1;
     this->height=pheight;
     this->weight=pweight;
     this->IMC=this->weight/((this->height)*(this->height));
+    this->sexe = psexe;
+
 
     this->min_to_wait=0;
     this->actual_grams=0;
@@ -90,21 +96,21 @@ protected:
     const float max_grams = 0.25;
 public:
     bool canHeDrive();
-    young(char initial0, char initial1, int pweight, float pheight);
+    young(char initial0, char initial1, int pweight, float pheight, char psexe);
 };
 
-young::young(char initial0, char initial1, int pweight, float pheight):user(initial0, initial1, pweight, pheight){}
+young::young(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, psexe){}
 
 class expert:public user{
 protected:
     const float max_grams = 0.5;
 public:
     bool canHeDrive();
-    expert(char initial0, char initial1, int pweight, float pheight);
+    expert(char initial0, char initial1, int pweight, float pheight, char psexe);
 
 };
 
-expert::expert(char initial0, char initial1, int pweight, float pheight):user(initial0, initial1, pweight, pheight){}
+expert::expert(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, sexe){}
 
 int user::get_weight(){
     return this->weight;
@@ -159,6 +165,16 @@ bool expert::canHeDrive(){
         return false;
     else
         return true;
+}
+
+void user::addConso(){
+    if (sexe == 'f'){
+        actual_grams = actual_grams + 10/(weight*0.6);
+    }
+    else if (sexe == 'h'){
+        actual_grams = actual_grams + 10/(weight*0.7);
+    }
+    
 }
 
 #endif //info_H
