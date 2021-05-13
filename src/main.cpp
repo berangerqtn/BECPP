@@ -4,7 +4,7 @@
 // Faire Ctrl+H dans le menu.h pour remplacer tous les Serial.println par lcd.print
 
 rgb_lcd lcd;
-menu main_menu;  
+  
 
 
 //menu main_menu;
@@ -17,7 +17,7 @@ user user4('g','d',120,1.85,'h');
 void setup() {
   setup_ESP();
   setup_WebServer();
-  //main_menu.menu_init();
+  main_menu.menu_init();
   main_menu.addPlayer(user1);
   main_menu.addPlayer(user2);
   main_menu.addPlayer(user3);

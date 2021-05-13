@@ -31,7 +31,6 @@ public :
 
     menu();
     void menu_init();
-    list<user> get_list();
     void add_to_list(user newU);
 
 };
@@ -47,12 +46,8 @@ menu::menu(){
     m_level=0;
 }
 
-list<user> menu::get_list(){
-    return l_user;
-}
-
 void menu::add_to_list(user newU){
-    l_user.push_back(newU);
+    l_user.push_back(&newU);
 }
 
 
@@ -105,8 +100,8 @@ void menu::menu_display(){
             it=l_user.begin();
             while (it!=l_user.end()){
                 //Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
-                lcd.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
-                lcd.print((*it).get_actual_grams());
+                lcd.print((*it)->get_i0()+(*it)->get_i1()+" grammes d'alcool : ");
+                lcd.print((*it)->get_actual_grams());
                 while(digitalRead(Push)!=HIGH){yield();}
                 delay(200);
                 it++;
@@ -138,18 +133,18 @@ void menu::menu_display(){
                 yield();
                 
                 if (analogRead(Pot)<1024/3 && it!= l_user.begin()){
-                    lcd.print((*it).get_i0() + (*it).get_i1());
+                    lcd.print((*it)->get_i0() + (*it)->get_i1());
                     lcd.setCursor(1,0);
                     lcd.print("Prev. User");
                 }
                 else if (analogRead(Pot)> 2*1024/3 && it != l_user.end()){
-                    lcd.print((*it).get_i0() + (*it).get_i1());
+                    lcd.print((*it)->get_i0() + (*it)->get_i1());
                     lcd.setCursor(1,0);
                     lcd.print("Next User");
 
                 }
                 else{
-                    lcd.print((*it).get_i0() + (*it).get_i1());
+                    lcd.print((*it)->get_i0() + (*it)->get_i1());
                     lcd.setCursor(1,0);
                     lcd.print("This User");
                 }
@@ -161,7 +156,7 @@ void menu::menu_display(){
                 it++;
             }
             else {
-                (*it).add_grams(DOSE);
+                (*it)->addConso();
             }
             
         }

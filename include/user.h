@@ -96,8 +96,6 @@ user::user(char initial0, char initial1, int pweight, float pheight, char psexe)
     this->weight=pweight;
     this->IMC=this->weight/((this->height)*(this->height));
     this->sexe = psexe;
-
-
     this->min_to_wait=0;
     this->actual_grams=0;
 
@@ -157,15 +155,15 @@ float user::get_actual_grams(){
     return this->actual_grams;
 }
 
+void user::set_actual_grams(float g){
+    this->actual_grams=g;
+}
+
 bool user::operator>(user& right_user){
     if (this->get_actual_grams()>right_user.get_actual_grams()) {
         return true;
     }
     else return false;
-}
-
-void user::add_grams(float g){
-    this->actual_grams+=g;
 }
 
 bool young::canHeDrive(){
