@@ -12,11 +12,14 @@ user user4('g','d',120,1.85);
 
 void setup() {
   setup_ESP();
-  setup_WebServer();  
+  setup_WebServer(); 
+  user1.set_actual_grams(2.2);
   main_menu.addPlayer(user1);
   main_menu.addPlayer(user2);
   main_menu.addPlayer(user3);
   main_menu.addPlayer(user4);
+  user1.set_actual_grams(1.2);
+  
 }
 
 void loop() {

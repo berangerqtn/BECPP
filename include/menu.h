@@ -13,8 +13,8 @@ class menu{
 protected :
     std::map<int,String> m0; //Premier niveau de menu
     std::map<int,String> m1; //Sous menu de Consommation
-    list<user> l_user;
-    list<user>::iterator it;
+    list<user*> l_user;
+    list<user*>::iterator it;
 
     int m_level;
 
@@ -24,8 +24,8 @@ public :
     char set_i1();
     int set_weight();
     float set_height();
-    list<user> get_list(){return l_user;}
-    void addPlayer(user u);
+    list<user*> get_list(){return l_user;}
+    void addPlayer(user& u);
 
     menu();
 };
@@ -65,11 +65,11 @@ void menu::menu_display(){
             }
             if (18+analogRead(Pot)/13<22){
                 young newUser(set_i0(), set_i1(), set_weight(), set_height());
-                l_user.push_back(newUser);
+                l_user.push_back(&newUser);
             }
             else{
                 expert newUser(set_i0(), set_i1(), set_weight(), set_height());
-                l_user.push_back(newUser);
+                l_user.push_back(&newUser);
             }
             
         }
@@ -77,7 +77,7 @@ void menu::menu_display(){
             //SEE USERS
             it=l_user.begin();
             while (it!=l_user.end()){
-                Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
+                Serial.print((*it)->get_i0()+(*it)->get_i1()+" grammes d'alcool : ");
                 it++;
             }
             
@@ -144,8 +144,8 @@ float menu::set_height(){
     return 1.2+(analogRead(0)/10)/100.0;
 }
 
-void menu::addPlayer(user u){
-    l_user.push_back(u);
+void menu::addPlayer(user& u){
+    l_user.push_back(&u);
 }
 
 

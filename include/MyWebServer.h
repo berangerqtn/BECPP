@@ -24,7 +24,7 @@ const char* SSID ="Livebox-C4A6";
 const char* MDP ="lulukiki";
 
 menu main_menu;
-list<user> myList = main_menu.get_list();
+list<user*> myList = main_menu.get_list();
 int i = 1;
 
 
@@ -105,32 +105,17 @@ void setup_WebServer(){
 
 void afficherListe(){
   myList = main_menu.get_list();
-  list<user>::iterator it ;
+  list<user*>::iterator it ;
   String texte_remp;
   String toReplace;
   
   for (it = myList.begin(); it!= myList.end(); it++){
     toReplace = "%personne " + (String)i +"%";
-    texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
+    texte_remp = (String)(*it)->get_i0() + " " + (String)(*it)->get_i1() + " actual gram :" + (String)(*it)->get_actual_grams();
     temp.replace(toReplace, texte_remp);
     i=i+1;
   }
-  i=1;
-  
-  /*texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
-  temp.replace("%personne 1%", texte_remp);
-  it++;
-  texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
-  temp.replace("%personne 2%", texte_remp);
-  it++;
-  texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
-  temp.replace("%personne 3%", texte_remp);
-  it++;
-  texte_remp = (String)(*it).get_i0() + " " + (String)(*it).get_i1() + " actual gram :" + (String)(*it).get_actual_grams();
-  temp.replace("%personne 4%", texte_remp);*/
-
-
-  
+  i=1; 
   WebServer.send(200, "text/html",temp);
 }
 
