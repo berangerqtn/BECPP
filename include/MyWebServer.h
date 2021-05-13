@@ -36,12 +36,11 @@ int LED_STATE=0;
 void setup_ESP();
 void setup_WebServer();
 void root();
-void afficherListe();
+void updateList();
 void LED_ON();
 void LED_OFF();
 void onGotIP(const WiFiEventStationModeGotIP event);
 void onConnected(const WiFiEventStationModeConnected event);
-void touchButton();
 void computeGrams();
 
 
@@ -100,13 +99,13 @@ void setup_WebServer(){
   //Mise en place du Serveur Web
   WebServer.on("/LED_ON", LED_ON);
   WebServer.on("/LED_OFF", LED_OFF);
-  WebServer.on("/afficher_liste", afficherListe);
+  WebServer.on("/afficher_liste", updateList);
   WebServer.on("/",root);
   WebServer.begin();
 
 }
 
-void afficherListe(){
+void updateList(){
   myList = main_menu.get_list();
   list<user*>::iterator it ;
   String texte_remp;
@@ -114,7 +113,7 @@ void afficherListe(){
   computeGrams();
   for (it = myList.begin(); it!= myList.end(); it++){
     toReplace = "%personne " + (String)i +"%";
-    texte_remp = (String)(*it)->get_i0() + " " + (String)(*it)->get_i1() + " actual gram :" + (String)(*it)->get_actual_grams();
+    texte_remp = (String)(*it)->get_i0() + " " + (String)(*it)->get_i1() + " actual grams :" + (String)(*it)->get_actual_grams();
     temp.replace(toReplace, texte_remp);
     i=i+1;
   }
@@ -160,11 +159,6 @@ void onGotIP(const WiFiEventStationModeGotIP event){
     Serial.println(WiFi.RSSI());
 }
 
-void touchButton(){
-  if (digitalRead(0)==HIGH)
-    Serial.println("You pushed");
-    delay(200);
-}
 
 
 void computeGrams(){

@@ -1,5 +1,4 @@
 #include "MyWebServer.h"
-#include "menu.h"
 //IMPORTANT : Pour passer de mon code sur moniteur série à du test sur ESP GrooveShield
 // Faire Ctrl+H dans le menu.h pour remplacer tous les Serial.println par lcd.print
 
@@ -39,7 +38,9 @@ void loop() {
     Serial.println("IP : ");
     Serial.println(WiFi.localIP());
     computeGrams();
+    updateList();
     WebServer.handleClient(); //prend en charge les clients qui peuvent venir sur mon serveur
+    
   } else {
     digitalWrite(PIN_LED_WIFI_CONNECTED, LOW);
     Serial.println("non connecté");
