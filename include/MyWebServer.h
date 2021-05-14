@@ -22,11 +22,9 @@ ESP8266WebServer WebServer(80);
 /*const char* SSID ="DJZier";
 const char* MDP ="flolpb64";*/
 
-const char* SSID ="Livebox-C4A6";
-const char* MDP ="lulukiki";
+const char* SSID ="OPPO A72";
+const char* MDP ="berangerqtn";
 
-menu main_menu;
-list<user*> myList = main_menu.get_list();
 int i = 1;
 
 
@@ -41,7 +39,6 @@ void LED_ON();
 void LED_OFF();
 void onGotIP(const WiFiEventStationModeGotIP event);
 void onConnected(const WiFiEventStationModeConnected event);
-void computeGrams();
 
 
 
@@ -66,6 +63,9 @@ const char index_html[] PROGMEM = R"=====(
         </a>
         <a href="/LED_OFF">
         <button>Turn the LED OFF</button>
+        </a>
+        <a href="/updatelist">
+        <button>Update List</button>
         </a>
     </body>
 </html>
@@ -99,7 +99,7 @@ void setup_WebServer(){
   //Mise en place du Serveur Web
   WebServer.on("/LED_ON", LED_ON);
   WebServer.on("/LED_OFF", LED_OFF);
-  WebServer.on("/afficher_liste", updateList);
+  WebServer.on("/updatelist", updateList);
   WebServer.on("/",root);
   WebServer.begin();
 
@@ -110,7 +110,7 @@ void updateList(){
   list<user*>::iterator it ;
   String texte_remp;
   String toReplace;
-  computeGrams();
+  main_menu.computeGrams();
   for (it = myList.begin(); it!= myList.end(); it++){
     toReplace = "%personne " + (String)i +"%";
     texte_remp = (String)(*it)->get_i0() + " " + (String)(*it)->get_i1() + " actual grams :" + (String)(*it)->get_actual_grams();
@@ -119,6 +119,7 @@ void updateList(){
   }
   i=1; 
   WebServer.send(200, "text/html",temp);
+  root();
 }
 
 
@@ -159,22 +160,5 @@ void onGotIP(const WiFiEventStationModeGotIP event){
     Serial.println(WiFi.RSSI());
 }
 
-
-
-void computeGrams(){
-  list<user*>::iterator it ;
-  myList = main_menu.get_list();
-  for (it = myList.begin(); it!= myList.end(); it++){
-    if ((*it)->get_sexe() == 'f'){
-      //(*it)->set_actual_grams((*it)->get_actual_grams()-0.085*(millis()-(*it)->get_time())/3600000);
-      (*it)->set_actual_grams((*it)->get_actual_grams()+0.01);
-    }
-    else if ((*it)->get_sexe() == 'h'){
-      (*it)->set_actual_grams((*it)->get_actual_grams()-(0.1*(millis()-(*it)->get_time())/3600000));
-    }
-    
-    (*it)->set_time(millis());
-  }
-}
 
 #endif //MYWEBSERVER_H
