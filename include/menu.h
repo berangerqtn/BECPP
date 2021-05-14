@@ -58,9 +58,7 @@ void menu::add_to_list(user newU){
 
 
 void menu::menu_display(){
-    if (m_level==0){
-        //Serial.println("On est au niveau 0");
-        
+    if (m_level==0){        
         while(digitalRead(Push)!=HIGH){
             lcd.clear();
             computeGrams();
@@ -219,6 +217,7 @@ char menu::set_sexe(){
     Serial.println("Quel est votre sexe ?");
     while (digitalRead(Push)!=HIGH){
         computeGrams();
+        yield();
         if (analogRead(Pot)<1024/2){
             Serial.println("Homme");
         }

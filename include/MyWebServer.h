@@ -22,8 +22,8 @@ ESP8266WebServer WebServer(80);
 /*const char* SSID ="DJZier";
 const char* MDP ="flolpb64";*/
 
-const char* SSID ="OPPO A72";
-const char* MDP ="berangerqtn";
+const char* SSID ="Livebox-927A";
+const char* MDP ="livebox_QUINTANA";
 
 int i = 1;
 

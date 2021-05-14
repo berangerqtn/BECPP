@@ -30,21 +30,26 @@ void setup() {
 }
 
 void loop() {
-  main_menu.menu_display(); 
+  main_menu.computeGrams();
+  updateList();
+  if (digitalRead(Push)==1){
+    delay(300);
+    main_menu.menu_display();
+  } 
   // put your main code here, to run repeatedly:
-  /*if (WiFi.isConnected()){
+  if (WiFi.isConnected()){
     digitalWrite(PIN_LED_WIFI_CONNECTED, HIGH);
-    Serial.println("connecté");
-    Serial.println("IP : ");
-    Serial.println(WiFi.localIP());
-    computeGrams();
+    //Serial.println("connecté");
+    //Serial.println("IP : ");
+    //Serial.println(WiFi.localIP());
+    main_menu.computeGrams();
     updateList();
     WebServer.handleClient(); //prend en charge les clients qui peuvent venir sur mon serveur
     
   } else {
     digitalWrite(PIN_LED_WIFI_CONNECTED, LOW);
     Serial.println("non connecté");
-  }*/
+  }
   //WebServer.on("/afficher_liste", afficherListe);
    // WebServer.handleClient();
    //computeGrams();
