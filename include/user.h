@@ -6,8 +6,9 @@
 
 //rgb_lcd lcd;
 
-int Push = 16;
-int Pot = 0;
+#define Push  16
+#define Pot  0
+
 int nbUser=0;
 
 using namespace std;

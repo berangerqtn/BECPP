@@ -1,20 +1,13 @@
-# The NDICD Project
-__Not drunk I Can Drive Project__
+# SJC Project
+__Sobre Je Conduis__
 
-This project appears in the contexte of the **C++** Class in 4th Year **Embedded Systems** at the **INSA Toulouse**.
-You will find here a little Tutorial on how to use our tool thanks to four main steps :
+Ce projet a été réalisé dans le cadre du cours **C++ et Programmation orientée objet** en 4ème année **Systèmes Embarqués** à l'**INSA Toulouse**. Vous trouverez à travers ce readme les différents éléments de compréhension du code développé ainsi que les étapes :
 
-- [Class Diagram](./docs/classdiagram.pdf) of the program
-- Explanation of the global behaviour
-- Classical cases of use
-- A few more tips...
+- [Diagramme de Classes](./docs/classdiagram.pdf) du projet
+- [Conception électronique](./docs/elec.md) 
+- [Premiers pas](./docs/firststeps.md)
+- [Petits conseils supplémentaires...](./docs/tips.md)
 
-A wise man once said 
->Our planet is full of little producers working hard to give us high quality products. Help them choosing their products.
-> 
-> 
->DJZier
-
-
-
+__Petit rappel__
+>L'abus d'alcool est dangereux pour la santé, à consommer avec modération
     
