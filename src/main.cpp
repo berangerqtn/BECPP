@@ -32,12 +32,15 @@ void setup() {
 void loop() {
   main_menu.computeGrams();
   updateList();
-  if (digitalRead(Push)==1){
+  if (digitalRead(Push)==1 && main_menu.get_m_level()==0){
     delay(300);
     main_menu.menu_display();
   } 
+  else if (main_menu.get_m_level()==1){
+    main_menu.menu_display();
+  }
   // put your main code here, to run repeatedly:
-  if (WiFi.isConnected()){
+  /*if (WiFi.isConnected()){
     digitalWrite(PIN_LED_WIFI_CONNECTED, HIGH);
     //Serial.println("connecté");
     //Serial.println("IP : ");
@@ -49,7 +52,7 @@ void loop() {
   } else {
     digitalWrite(PIN_LED_WIFI_CONNECTED, LOW);
     Serial.println("non connecté");
-  }
+  }*/
   //WebServer.on("/afficher_liste", afficherListe);
    // WebServer.handleClient();
    //computeGrams();
