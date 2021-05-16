@@ -164,18 +164,19 @@ void menu::menu_display(){
     else if (m_level==1){  
 
         while(digitalRead(Push)!=HIGH){
-            yield();
+            yield();            
             lcd.clear();
             computeGrams();
             if (analogRead(Pot)<1024/2){
                 lcd.print(m1[0]); //Sélection USER
-                delay(100);
             }
             else
                 lcd.print(m1[1]);//Retour
-                delay(100);
+            delay(100);
         }
-        
+
+        delay(200);
+
         if (analogRead(Pot)<1024/2){
             //Selection Utilisateur qui consomme.
             delay(300);
@@ -187,6 +188,7 @@ void menu::menu_display(){
                 
                 while (digitalRead(Push)!= HIGH){
                     yield();
+                    delay(100);
                     lcd.clear();
                     if (analogRead(Pot)<1024/3 && it!= l_user.begin()){
                         lcd.setCursor(0,0);
@@ -195,7 +197,6 @@ void menu::menu_display(){
                         lcd.print((*it)->get_i1());
                         lcd.setCursor(3,0);
                         lcd.print("Prev. User");
-                        delay(100);
                     }
                     else if (analogRead(Pot)> 2*1024/3 && it != l_user.end()){
                         lcd.setCursor(0,0);
@@ -204,7 +205,6 @@ void menu::menu_display(){
                         lcd.print((*it)->get_i1());
                         lcd.setCursor(3,0);
                         lcd.print("Next User");
-                        delay(100);
 
                     }
                     else{
@@ -214,20 +214,22 @@ void menu::menu_display(){
                         lcd.print((*it)->get_i1());
                         lcd.setCursor(3,0);
                         lcd.print("This User");
-                        delay(100);
 
                     }
-                    delay(200);
                 }
+                delay(200);
                 if (analogRead(Pot)<1024/3){
-                it--;
+                    it--;
+                   
                 }
                 else if (analogRead(Pot)>2*1024/3){
                     it++;
+                  
                 }
                 else {
                     (*it)->addConso();
                     m_level=0;
+                  
                 }
             }
             
