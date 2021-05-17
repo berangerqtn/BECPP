@@ -192,11 +192,11 @@ void menu::menu_display(){
             yield();
             delay(200);
             
-            while (digitalRead(Push)!= HIGH){
+            while (digitalRead(Push)!= HIGH) {
                 yield();
                 delay(100);
                 lcd.clear();
-                if (analogRead(Pot)<1024/3 && it!= l_user.begin()){
+                if (analogRead(Pot)<1024/3){
                     lcd.setCursor(0,0);
                     lcd.print((*it)->get_i0());
                     lcd.setCursor(1,0);
@@ -204,7 +204,7 @@ void menu::menu_display(){
                     lcd.setCursor(3,0);
                     lcd.print("Prev. User");
                 }
-                else if (analogRead(Pot)> 2*1024/3 && it != l_user.end()){
+                else if (analogRead(Pot)> 2*1024/3){
                     lcd.setCursor(0,0);
                     lcd.print((*it)->get_i0());
                     lcd.setCursor(1,0);
