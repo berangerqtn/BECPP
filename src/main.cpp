@@ -39,6 +39,9 @@ void loop() {
   else if (main_menu.get_m_level()==1){
     main_menu.menu_display();
   }
+  else if (main_menu.get_m_level()==2){
+    main_menu.menu_display();
+  }
   // put your main code here, to run repeatedly:
   /*if (WiFi.isConnected()){
     digitalWrite(PIN_LED_WIFI_CONNECTED, HIGH);

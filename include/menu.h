@@ -176,68 +176,69 @@ void menu::menu_display(){
         if (analogRead(Pot)<1024/2){
             //Selection Utilisateur qui consomme.
             delay(100);
+            m_level=2;
             it = l_user.begin();
-            while (m_level==1){
-                lcd.clear();
-                computeGrams();
-                yield();
-                delay(200);
-                
-                while (digitalRead(Push)!= HIGH){
-                    yield();
-                    delay(100);
-                    lcd.clear();
-                    if (analogRead(Pot)<1024/3 && it!= l_user.begin()){
-                        lcd.setCursor(0,0);
-                        lcd.print((*it)->get_i0());
-                        lcd.setCursor(1,0);
-                        lcd.print((*it)->get_i1());
-                        lcd.setCursor(3,0);
-                        lcd.print("Prev. User");
-                    }
-                    else if (analogRead(Pot)> 2*1024/3 && it != l_user.end()){
-                        lcd.setCursor(0,0);
-                        lcd.print((*it)->get_i0());
-                        lcd.setCursor(1,0);
-                        lcd.print((*it)->get_i1());
-                        lcd.setCursor(3,0);
-                        lcd.print("Next User");
-
-                    }
-                    else{
-                        lcd.setCursor(0,0);
-                        lcd.print((*it)->get_i0());
-                        lcd.setCursor(1,0);
-                        lcd.print((*it)->get_i1());
-                        lcd.setCursor(3,0);
-                        lcd.print("This User");
-                         m_level=0;
-
-                    }
-                }
-                delay(200);
-                if (analogRead(Pot)<1024/3){
-                    it--;
-                   
-                }
-                else if (analogRead(Pot)>2*1024/3){
-                    it++;
-                  
-                }
-                else {
-                    (*it)->addConso();
-                   
-                  
-                }
-                delay(200);
-            }
-            delay(200);
-            
         }
         else{
             //RETOUR à m0
             m_level=0;
         }
+    }
+        
+    if (m_level ==2){
+        while (m_level==1){
+            lcd.clear();
+            computeGrams();
+            yield();
+            delay(200);
+            
+            while (digitalRead(Push)!= HIGH){
+                yield();
+                delay(100);
+                lcd.clear();
+                if (analogRead(Pot)<1024/3 && it!= l_user.begin()){
+                    lcd.setCursor(0,0);
+                    lcd.print((*it)->get_i0());
+                    lcd.setCursor(1,0);
+                    lcd.print((*it)->get_i1());
+                    lcd.setCursor(3,0);
+                    lcd.print("Prev. User");
+                }
+                else if (analogRead(Pot)> 2*1024/3 && it != l_user.end()){
+                    lcd.setCursor(0,0);
+                    lcd.print((*it)->get_i0());
+                    lcd.setCursor(1,0);
+                    lcd.print((*it)->get_i1());
+                    lcd.setCursor(3,0);
+                    lcd.print("Next User");
+
+                }
+                else{
+                    lcd.setCursor(0,0);
+                    lcd.print((*it)->get_i0());
+                    lcd.setCursor(1,0);
+                    lcd.print((*it)->get_i1());
+                    lcd.setCursor(3,0);
+                    lcd.print("This User");
+                }
+            }
+            delay(200);
+            if (analogRead(Pot)<1024/3 && it!= l_user.begin()){
+                it--;                
+            }
+            else if (analogRead(Pot)>2*1024/3 && it != l_user.end()){
+                it++;    
+            }
+            else {
+                (*it)->addConso();
+                m_level=0;
+            }
+            delay(200);
+        }
+        delay(200);
+            
+        
+        
     }
 }
 
