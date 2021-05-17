@@ -186,7 +186,7 @@ void menu::menu_display(){
     }
         
     if (m_level ==2){
-        while (m_level==1){
+        while (m_level==2){
             lcd.clear();
             computeGrams();
             yield();
