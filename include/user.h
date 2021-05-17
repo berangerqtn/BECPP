@@ -121,7 +121,6 @@ protected:
 public:
     bool canHeDrive();
     expert(char initial0, char initial1, int pweight, float pheight, char psexe);
-
 };
 
 expert::expert(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, sexe){}

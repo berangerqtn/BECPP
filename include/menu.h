@@ -236,9 +236,6 @@ void menu::menu_display(){
             delay(200);
         }
         delay(200);
-            
-        
-        
     }
 }
 
