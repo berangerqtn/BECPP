@@ -171,7 +171,7 @@ void menu::menu_display(){
                 delay(100);
         }
 
-        delay(100);
+        delay(200);
 
         if (analogRead(Pot)<1024/2){
             //Selection Utilisateur qui consomme.
@@ -181,6 +181,7 @@ void menu::menu_display(){
                 lcd.clear();
                 computeGrams();
                 yield();
+                delay(200);
                 
                 while (digitalRead(Push)!= HIGH){
                     yield();
@@ -210,6 +211,7 @@ void menu::menu_display(){
                         lcd.print((*it)->get_i1());
                         lcd.setCursor(3,0);
                         lcd.print("This User");
+                         m_level=0;
 
                     }
                 }
@@ -224,7 +226,7 @@ void menu::menu_display(){
                 }
                 else {
                     (*it)->addConso();
-                    m_level=0;
+                   
                   
                 }
                 delay(200);
