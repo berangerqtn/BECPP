@@ -7,17 +7,17 @@ rgb_lcd lcd;
 
 
 //menu main_menu;
-user user1('f','c',80,1.75,'h');
+/*user user1('f','c',80,1.75,'h');
 user user2('b','q',90,1.90,'h');
 user user3('s','g',60,1.54,'f');
 user user4('g','d',120,1.85,'h');
-//user user5('b','l',70,1.86);
+//user user5('b','l',70,1.86);*/
 
 void setup() {
   setup_ESP();
   setup_WebServer();
   main_menu.menu_init();
-  main_menu.addPlayer(user1);
+  /*main_menu.addPlayer(user1);
   main_menu.addPlayer(user2);
   main_menu.addPlayer(user3);
   main_menu.addPlayer(user4);
@@ -25,7 +25,7 @@ void setup() {
   user2.addConso();
   //user2.addConso();
   user3.addConso();
-  user4.set_actual_grams(100);
+  user4.set_actual_grams(100);*/
 
 }
 

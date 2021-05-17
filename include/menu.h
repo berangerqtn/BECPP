@@ -31,9 +31,10 @@ public :
 
     char set_sexe();
     list<user*> get_list(){return l_user;}
-    void addPlayer(user& u);
+    /*void addPlayer(user& u);
     void addPlayer(young& u);
-    void addPlayer(expert& u);
+    void addPlayer(expert& u);*/
+    void addPlayer(int user_type);
     void computeGrams();
     int get_m_level(){return m_level;};
 
@@ -72,7 +73,6 @@ void menu::menu_display(){
             computeGrams();
             if (analogRead(Pot)<1024/4){
                 lcd.clear();
-                //lcd.print(m0[0]);
                 lcd.print(m0[0]);
                 delay(100);
             }
@@ -113,13 +113,13 @@ void menu::menu_display(){
             }
             delay(200);
             if (18+analogRead(Pot)/13<22){
-                young newUser(set_i0(), set_i1(), set_weight(), set_height(), set_sexe());
-                main_menu.addPlayer(newUser);
+                main_menu.addPlayer(2);
+                m_level=0;
                 //Serial.print("User Créé");
             }
             else{
-                expert newUser(set_i0(), set_i1(), set_weight(), set_height(), set_sexe());
-                main_menu.addPlayer(newUser);
+                main_menu.addPlayer(1);
+                m_level=0;
                 //Serial.print("User Créé");
 
             }
@@ -153,10 +153,6 @@ void menu::menu_display(){
             lcd.clear();
             m_level=1;
         }
-
-        else{
-            
-        }
         
     }
     
@@ -172,14 +168,14 @@ void menu::menu_display(){
             }
             else
                 lcd.print(m1[1]);//Retour
-            delay(100);
+                delay(100);
         }
 
-        delay(200);
+        delay(100);
 
         if (analogRead(Pot)<1024/2){
             //Selection Utilisateur qui consomme.
-            delay(300);
+            delay(100);
             it = l_user.begin();
             while (m_level==1){
                 lcd.clear();
@@ -231,7 +227,9 @@ void menu::menu_display(){
                     m_level=0;
                   
                 }
+                delay(200);
             }
+            delay(200);
             
         }
         else{
@@ -338,7 +336,18 @@ void menu::menu_init(){
     delay(300);
 }
 
-void menu::addPlayer(user& u){
+void menu::addPlayer(int user_type){
+    //expert
+    if (user_type==1){
+        l_user.push_back(new expert(set_i0(), set_i1(), set_weight(), set_height(), set_sexe()));
+    }
+    else{
+        l_user.push_back(new young(set_i0(), set_i1(), set_weight(), set_height(), set_sexe()));
+    }
+    
+}
+
+/*void menu::addPlayer(user& u){
     l_user.push_back(&u);
 }
 void menu::addPlayer(young& u){
@@ -347,7 +356,7 @@ void menu::addPlayer(young& u){
 
 void menu::addPlayer(expert& u){
     l_user.push_back(&u);
-}
+}*/
 void menu::computeGrams(){
   list<user*>::iterator it ;
   myList = main_menu.get_list();
