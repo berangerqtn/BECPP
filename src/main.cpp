@@ -7,14 +7,6 @@ rgb_lcd lcd;
 expert* Michel = new expert('m','m',300,1.9,'h');
 young* Johnathane = new young('j','j',50,1.9,'f');
 
-
-//menu main_menu;
-/*user user1('f','c',80,1.75,'h');
-user user2('b','q',90,1.90,'h');
-user user3('s','g',60,1.54,'f');
-user user4('g','d',120,1.85,'h');
-//user user5('b','l',70,1.86);*/
-
 void setup() {
   setup_ESP();
   setup_WebServer();

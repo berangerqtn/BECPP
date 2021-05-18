@@ -45,13 +45,11 @@ public:
 
     void set_actual_grams(float g);
     void set_time(unsigned long mTime);
-    virtual void addConso();
-    void operator++();
+
 
     //Methods
-
-    void swap_users(user *ut);    
-    bool operator > (user& right_user);
+    virtual void addConso();
+    void operator++();
 };
 
 user::user(char initial0, char initial1, int pweight, float pheight, char psexe){
@@ -106,25 +104,12 @@ float user::get_height(){
     return this->height;
 }
 
-void user::swap_users(user *ut){
-    user temp=*ut;
-    *ut=*this;
-    *this=temp;
-}
-
 float user::get_actual_grams(){
     return this->actual_grams;
 }
 
 void user::set_actual_grams(float g){
     this->actual_grams=g;
-}
-
-bool user::operator>(user& right_user){
-    if (this->get_actual_grams()>right_user.get_actual_grams()) {
-        return true;
-    }
-    else return false;
 }
 
 void user::operator++()
