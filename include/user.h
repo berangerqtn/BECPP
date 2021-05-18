@@ -22,7 +22,6 @@ protected:
     char sexe;
     int weight;
     float height;
-    //float IMC;
 
     float actual_grams;
     float max_grams = 0.2;
@@ -102,10 +101,6 @@ char user::get_i1(){
 float user::get_height(){
     return this->height;
 }
-
-/*float user::get_IMC(){
-    return this->IMC;
-}*/
 
 void user::swap_users(user *ut){
     user temp=*ut;
