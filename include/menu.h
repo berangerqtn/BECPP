@@ -105,17 +105,26 @@ void menu::menu_display(){
                 yield();
             }
             delay(200);
-            if (18+analogRead(Pot)/13<22){
-                main_menu.addPlayer(2);
-                m_level=0;
-                //Serial.print("User Créé");
-            }
-            else{
-                main_menu.addPlayer(1);
-                m_level=0;
-                //Serial.print("User Créé");
 
+            try{
+                if (l_user.size()>6)
+                    throw 1;
+                else{
+                    if (18+analogRead(Pot)/13<22){
+                        main_menu.addPlayer(2); // Création d'un jeune conducteur
+                        m_level=0;
+                    }
+                    else{
+                        main_menu.addPlayer(1); // Création d'un vieux conducteur
+                        m_level=0;
+                    }
+                }
             }
+            catch(int n){
+                Serial.println("COVID : pas plus de 6");
+            }
+
+                
             standby=true;
             
         }
