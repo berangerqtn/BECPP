@@ -223,7 +223,7 @@ void menu::menu_display(){
                 it++;    
             }
             else {
-                (*it)++;
+                (*it)->addConso();
                 m_level=0;
             }
             delay(200);

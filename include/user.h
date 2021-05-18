@@ -109,7 +109,7 @@ public:
 
 };
 
-expert::expert(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, sexe){}
+expert::expert(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, psexe){}
 
 class young:public user{
 protected:
@@ -178,10 +178,14 @@ void user::addConso()
 {
     if (sexe == 'f'){
         actual_grams+= DOSE/(weight*0.6);
+        Serial.println("Détail conso user: ");
+        Serial.println("Poids : ");
+        Serial.println(this->get_weight());
+        Serial.println(this->get_actual_grams());
     }
     else if (sexe == 'h'){
         actual_grams+= DOSE/(weight*0.7);
-    }    
+    }
 }
 void user::set_time(unsigned long mTime){
     time = mTime;
