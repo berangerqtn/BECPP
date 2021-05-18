@@ -188,6 +188,8 @@ void user::addConso(){
     else if (sexe == 'h'){
         actual_grams = actual_grams + 10/(weight*0.7);
     }    
+    Serial.println("Grammes actuels : ");
+    Serial.println(this->get_actual_grams());
 }
 
 void user::set_time(unsigned long mTime){
