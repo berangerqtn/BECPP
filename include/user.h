@@ -43,7 +43,6 @@ public:
 
     //setters
     void set_actual_grams(float g);
-    void set_info();
     void set_time(unsigned long mTime);
     virtual void addConso();
     void operator++();
@@ -51,42 +50,6 @@ public:
     void swap_users(user *ut);    
     bool operator > (user& right_user);
 };
-
-void user::set_info(){
-
-    //lcd.print("Combien Pesez vous ?");
-    while (digitalRead(Push)!=HIGH){
-        //lcd.print(40+(analogRead(0)/9));
-        yield();
-    }
-    this->weight=40+analogRead(0)/9;
-    delay(200);
-    //lcd.print("Voulez pesez  : " + this->weight);
-    delay(2000);
-    
-
-    //lcd.print("Combien mesurez vous ?");
-    while (digitalRead(Push)!=HIGH){
-        //lcd.print(120+(analogRead(0)/10));
-        yield();
-    }
-    this->height=1.2+(analogRead(0)/10)/100.0;
-    delay(200);
-    //lcd.print("Voulez mesurez : " + this->weight);
-    delay(2000);
-
-
-    //this->IMC=this->weight/((this->height)*(this->height));
-    //lcd.print("Vous avez un IMC de : " + String(this->IMC));
-
-    delay(2000);
-
-    //lcd.print("BILAN UTILISATEUR");
-    //lcd.print("Poids : " + String(this->get_weight()));
-    //lcd.print("Taille : " + String(this->get_height()));
-    //lcd.print("IMC : "+ String(this->get_IMC()));
-    nbUser++;
-}
 
 user::user(char initial0, char initial1, int pweight, float pheight, char psexe){
     this->i0=initial0;
