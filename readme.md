@@ -12,13 +12,13 @@ A partir des éléments saisis par l'utilisateur, le SJC va calculer en permanen
 
 ## Pour vous guider
 
-
 Vous trouverez à travers ce readme les différents éléments de compréhension du code développé ainsi que les étapes :
 
 - [Conception électronique](./docs/elec.md) 
 - [Premiers pas](./docs/firststeps.md)
 - [Petits conseils supplémentaires...](./docs/tips.md)
 - [Diagramme de Classes du projet](./docs/classdiagram.pdf)
+- [Diagramme de séquence du projet](./docs/sequencediagram.pdf)
 
 __Petit rappel__
 >L'abus d'alcool est dangereux pour la santé, à consommer avec modération
