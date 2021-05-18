@@ -25,7 +25,7 @@ protected:
     //float IMC;
 
     float actual_grams;
-
+    float max_grams = 0.2;
     unsigned long time;
 
 public:
@@ -39,6 +39,7 @@ public:
     float get_actual_grams();
     char get_sexe(){return sexe;};
     unsigned long get_time(){return time;};
+    bool canHeDrive(){return (this->actual_grams)<(this->max_grams);};
 
     //setters
     void set_actual_grams(float g);
@@ -113,7 +114,7 @@ expert::expert(char initial0, char initial1, int pweight, float pheight, char ps
 
 class young:public user{
 protected:
-    const float max_grams = 0.25;
+    float max_grams = 0.1;
 public:
     bool canHeDrive(){return this->actual_grams<this->max_grams;};
     young(char initial0, char initial1, int pweight, float pheight, char psexe);

@@ -67,19 +67,19 @@ void menu::menu_display(){
             if (analogRead(Pot)<1024/4){
                 lcd.clear();
                 lcd.print(m0[0]);
-                delay(100);
+                delay(200);
             }
             else if (1024/4<analogRead(Pot) && analogRead(Pot)<1024*2/4){
                 lcd.clear();
                 //lcd.print(m0[1]);
                 lcd.print(m0[1]);
-                delay(100);
+                delay(200);
             }
             else if (1024*2/4<analogRead(Pot) && analogRead(Pot)<1024*3/4) {
                 lcd.clear();
                 //lcd.print(m0[2]);
                 lcd.print(m0[2]);
-                delay(100);
+                delay(200);
             }
             else{
                 lcd.clear();
@@ -126,6 +126,12 @@ void menu::menu_display(){
             it=l_user.begin();
             while (it!=l_user.end()){
                 //Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
+                 if ((*it)->canHeDrive()){
+                    lcd.setRGB(0,255,0);
+                }
+                else {
+                    lcd.setRGB(255,0,0);
+                }
                 lcd.setCursor(0,0);
                 lcd.print((*it)->get_i0());
                 lcd.setCursor(1,0);
@@ -134,19 +140,22 @@ void menu::menu_display(){
                 lcd.print((*it)->get_actual_grams());
                 lcd.setCursor(9,0);
                 lcd.print("grammes");
-                delay(200);
+               
+                delay(100);
                 while(digitalRead(Push)!=HIGH){yield();}
-                delay(200);
+                delay(100);
                 computeGrams();
                 it++;
             }
+            
         }
+        
 
         else if (1024*2/4<analogRead(0) && analogRead(0)<1024*3/4) {
             lcd.clear();
             m_level=1;
         }
-        
+        lcd.setRGB(255,255,0);
     }
     
     //GESTION DE LA CONSOMMATION
