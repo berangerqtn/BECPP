@@ -4,6 +4,8 @@
 
 rgb_lcd lcd;
   
+expert* Michel = new expert('m','m',140,1.9,'f');
+young* Johnathan = new young('m','m',140,1.9,'f');
 
 
 //menu main_menu;
@@ -17,6 +19,10 @@ void setup() {
   setup_ESP();
   setup_WebServer();
   main_menu.menu_init();
+  Michel->addConso();
+  Johnathan->addConso();
+  main_menu.addToList(Michel);
+  main_menu.addToList(Johnathan);
   /*main_menu.addPlayer(user1);
   main_menu.addPlayer(user2);
   main_menu.addPlayer(user3);
