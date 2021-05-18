@@ -66,24 +66,24 @@ void menu::menu_display(){
             computeGrams();
             if (analogRead(Pot)<1024/4){
                 lcd.clear();
-                Serial.println(m0[0]);
+                lcd.print(m0[0]);
                 delay(100);
             }
             else if (1024/4<analogRead(Pot) && analogRead(Pot)<1024*2/4){
                 lcd.clear();
-                //Serial.println(m0[1]);
-                Serial.println(m0[1]);
+                //lcd.print(m0[1]);
+                lcd.print(m0[1]);
                 delay(100);
             }
             else if (1024*2/4<analogRead(Pot) && analogRead(Pot)<1024*3/4) {
                 lcd.clear();
-                //Serial.println(m0[2]);
-                Serial.println(m0[2]);
+                //lcd.print(m0[2]);
+                lcd.print(m0[2]);
                 delay(100);
             }
             else{
                 lcd.clear();
-                Serial.println(m0[3]);
+                lcd.print(m0[3]);
                 delay(100);
             }
         }
@@ -91,15 +91,15 @@ void menu::menu_display(){
 
         if (analogRead(0)<1024/4){
             //ADD USERS
-            //Serial.println("Quel âge avez vous ?");
+            //lcd.print("Quel âge avez vous ?");
             lcd.clear();
-            Serial.println("Quel age avez vous ?");
+            lcd.print("Quel age avez vous ?");
             delay(1000);
             lcd.setCursor(1,0);
             while (digitalRead(Push)!=HIGH){
                 lcd.clear();
-                Serial.println(18+analogRead(Pot)/13);
-                //Serial.println(18+analogRead(Pot)/13);
+                lcd.print(18+analogRead(Pot)/13);
+                //lcd.print(18+analogRead(Pot)/13);
                 delay(100);
                 computeGrams();
                 yield();
@@ -127,13 +127,13 @@ void menu::menu_display(){
             while (it!=l_user.end()){
                 //Serial.print((*it).get_i0()+(*it).get_i1()+" grammes d'alcool : ");
                 lcd.setCursor(0,0);
-                Serial.println((*it)->get_i0());
+                lcd.print((*it)->get_i0());
                 lcd.setCursor(1,0);
-                Serial.println((*it)->get_i1());
+                lcd.print((*it)->get_i1());
                 lcd.setCursor(4,0);
-                Serial.println((*it)->get_actual_grams());
+                lcd.print((*it)->get_actual_grams());
                 lcd.setCursor(9,0);
-                Serial.println("grammes");
+                lcd.print("grammes");
                 delay(200);
                 while(digitalRead(Push)!=HIGH){yield();}
                 delay(200);
@@ -157,10 +157,10 @@ void menu::menu_display(){
             lcd.clear();
             computeGrams();
             if (analogRead(Pot)<1024/2){
-                Serial.println(m1[0]); //Sélection USER
+                lcd.print(m1[0]); //Sélection USER
             }
             else
-                Serial.println(m1[1]);//Retour
+                lcd.print(m1[1]);//Retour
                 delay(100);
         }
 
@@ -191,28 +191,28 @@ void menu::menu_display(){
                 lcd.clear();
                 if (analogRead(Pot)<1024/3){
                     lcd.setCursor(0,0);
-                    Serial.println((*it)->get_i0());
+                    lcd.print((*it)->get_i0());
                     lcd.setCursor(1,0);
-                    Serial.println((*it)->get_i1());
+                    lcd.print((*it)->get_i1());
                     lcd.setCursor(3,0);
-                    Serial.println("Prev. User");
+                    lcd.print("Prev. User");
                 }
                 else if (analogRead(Pot)> 2*1024/3){
                     lcd.setCursor(0,0);
-                    Serial.println((*it)->get_i0());
+                    lcd.print((*it)->get_i0());
                     lcd.setCursor(1,0);
-                    Serial.println((*it)->get_i1());
+                    lcd.print((*it)->get_i1());
                     lcd.setCursor(3,0);
-                    Serial.println("Next User");
+                    lcd.print("Next User");
 
                 }
                 else{
                     lcd.setCursor(0,0);
-                    Serial.println((*it)->get_i0());
+                    lcd.print((*it)->get_i0());
                     lcd.setCursor(1,0);
-                    Serial.println((*it)->get_i1());
+                    lcd.print((*it)->get_i1());
                     lcd.setCursor(3,0);
-                    Serial.println("This User");
+                    lcd.print("This User");
                 }
             }
             delay(200);
@@ -235,12 +235,12 @@ void menu::menu_display(){
 char menu::set_i0(){
     lcd.clear();
     lcd.setCursor(0,0);
-    Serial.println("Premiere initiale");
+    lcd.print("Premiere initiale");
     delay(1000);
 
     while (digitalRead(Push)!=HIGH){
         lcd.clear();
-        Serial.println(char(97+analogRead(0)/39));
+        lcd.print(char(97+analogRead(0)/39));
         delay(100);
         yield();
     }
@@ -250,11 +250,11 @@ char menu::set_i0(){
 
 char menu::set_i1(){
     lcd.clear();
-    Serial.println("Deuxieme initiale");
+    lcd.print("Deuxieme initiale");
     delay(1000);
     while (digitalRead(Push)!=HIGH){
         lcd.clear();
-        Serial.println(char(97+analogRead(0)/39));
+        lcd.print(char(97+analogRead(0)/39));
         computeGrams();
         yield();
         delay(100);
@@ -265,12 +265,12 @@ char menu::set_i1(){
 
 int menu::set_weight(){
     lcd.clear();
-    Serial.println("Cmb Pesez vous ?");
+    lcd.print("Cmb Pesez vous ?");
     delay(1000);
     while (digitalRead(Push)!=HIGH){    
         lcd.clear();
         lcd.setCursor(2,0);
-        Serial.println(40+(analogRead(0)/9));
+        lcd.print(40+(analogRead(0)/9));
         delay(100);
         computeGrams();
         yield();
@@ -280,7 +280,7 @@ int menu::set_weight(){
 }
 char menu::set_sexe(){
     lcd.clear();
-    Serial.println("Quel est votre sexe ?");
+    lcd.print("Quel est votre sexe ?");
     delay(1000);
     while (digitalRead(Push)!=HIGH){
         lcd.clear();
@@ -288,10 +288,10 @@ char menu::set_sexe(){
         computeGrams();
         yield();    
         if (analogRead(Pot)<1024/2){
-            Serial.println("Homme");
+            lcd.print("Homme");
         }
         else{
-            Serial.println("Femme");
+            lcd.print("Femme");
         }
         delay(100);
     }
@@ -303,15 +303,15 @@ char menu::set_sexe(){
 
 float menu::set_height(){
     lcd.clear();
-    Serial.println("Cmb mesurez vous ?");
+    lcd.print("Cmb mesurez vous ?");
     delay(1000);
     while (digitalRead(Push)!=HIGH){
         lcd.clear();
         lcd.setCursor(1,0);
         computeGrams();
-        Serial.println(120+(analogRead(0)/10));
+        lcd.print(120+(analogRead(0)/10));
         lcd.setCursor(6,0);
-        Serial.println("cm");
+        lcd.print("cm");
         yield();
         delay(100);
     }
@@ -322,11 +322,11 @@ float menu::set_height(){
 void menu::menu_init(){
     rgb_lcd lcd;
     lcd.begin(16,2);
-    Serial.println("begin LCD");
-    lcd.setRGB(255,0,0);
-    Serial.println("setRGB LCD");
+    lcd.print("begin LCD");
+    lcd.setRGB(255,255,0);
+    lcd.print("setRGB LCD");
     lcd.clear();
-    Serial.println("Press Button");
+    lcd.print("Press Button");
     //Serial.print("hello");
     delay(300);
 }
