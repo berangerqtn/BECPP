@@ -8,6 +8,7 @@
 
 #define Push  16
 #define Pot  0
+#define DOSE 10.0
 
 int nbUser=0;
 
@@ -19,14 +20,11 @@ protected:
     char i0;
     char i1;
     char sexe;
-
     int weight;
     float height;
-    float IMC;
-
+    //float IMC;
 
     float actual_grams;
-    int min_to_wait;
 
     unsigned long time;
 
@@ -38,7 +36,6 @@ public:
     char get_i1();
     int get_weight();
     float get_height();
-    float get_IMC();
     float get_actual_grams();
     char get_sexe(){return sexe;};
     unsigned long get_time(){return time;};
@@ -47,10 +44,10 @@ public:
     void set_actual_grams(float g);
     void set_info();
     void set_time(unsigned long mTime);
-
+    virtual void addConso();
+    void operator++();
     //methods
     void swap_users(user *ut);    
-    void addConso();
     bool operator > (user& right_user);
 };
 
@@ -78,7 +75,7 @@ void user::set_info(){
     delay(2000);
 
 
-    this->IMC=this->weight/((this->height)*(this->height));
+    //this->IMC=this->weight/((this->height)*(this->height));
     //lcd.print("Vous avez un IMC de : " + String(this->IMC));
 
     delay(2000);
@@ -95,9 +92,7 @@ user::user(char initial0, char initial1, int pweight, float pheight, char psexe)
     this->i1=initial1;
     this->height=pheight;
     this->weight=pweight;
-    this->IMC=this->weight/((this->height)*(this->height));
     this->sexe = psexe;
-    this->min_to_wait=0;
     this->actual_grams=0;
 
     time = millis();
@@ -105,26 +100,28 @@ user::user(char initial0, char initial1, int pweight, float pheight, char psexe)
     nbUser++;
 }
 
-class young:public user{
-protected:
-    const float max_grams = 0.25;
-public:
-    bool canHeDrive();
-    young(char initial0, char initial1, int pweight, float pheight, char psexe);
-};
-
-young::young(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, psexe){}
-
 class expert:public user{
 protected:
     const float max_grams = 0.5;
 public:
-    bool canHeDrive();
+    bool canHeDrive(){return this->actual_grams<this->max_grams;};
     expert(char initial0, char initial1, int pweight, float pheight, char psexe);
 
 };
 
-expert::expert(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, sexe){}
+expert::expert(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, psexe){}
+
+class young:public user{
+protected:
+    const float max_grams = 0.25;
+public:
+    bool canHeDrive(){return this->actual_grams<this->max_grams;};
+    young(char initial0, char initial1, int pweight, float pheight, char psexe);
+
+};
+
+young::young(char initial0, char initial1, int pweight, float pheight, char psexe):user(initial0, initial1, pweight, pheight, psexe){}
+
 
 int user::get_weight(){
     return this->weight;
@@ -142,9 +139,9 @@ float user::get_height(){
     return this->height;
 }
 
-float user::get_IMC(){
+/*float user::get_IMC(){
     return this->IMC;
-}
+}*/
 
 void user::swap_users(user *ut){
     user temp=*ut;
@@ -167,31 +164,31 @@ bool user::operator>(user& right_user){
     else return false;
 }
 
-bool young::canHeDrive(){
-    if (actual_grams>max_grams)
-        return false;
-    else
-        return true;
-}
-
-bool expert::canHeDrive(){
-    if (actual_grams>max_grams)
-        return false;
-    else
-        return true;
-}
-
-void user::addConso(){
+void user::operator++()
+{
     if (sexe == 'f'){
-        actual_grams = actual_grams + 10/(weight*0.6);
+        actual_grams+= DOSE/(weight*0.6);
     }
     else if (sexe == 'h'){
-        actual_grams = actual_grams + 10/(weight*0.7);
+        actual_grams+= DOSE/(weight*0.7);
     }    
     Serial.println("Grammes actuels : ");
     Serial.println(this->get_actual_grams());
 }
 
+void user::addConso()
+{
+    if (sexe == 'f'){
+        actual_grams+= DOSE/(weight*0.6);
+        Serial.println("Détail conso user: ");
+        Serial.println("Poids : ");
+        Serial.println(this->get_weight());
+        Serial.println(this->get_actual_grams());
+    }
+    else if (sexe == 'h'){
+        actual_grams+= DOSE/(weight*0.7);
+    }
+}
 void user::set_time(unsigned long mTime){
     time = mTime;
 }

@@ -4,20 +4,26 @@
 
 rgb_lcd lcd;
   
+expert* Michel = new expert('m','m',140,1.9,'h');
+young* Johnathane = new young('j','j',140,1.9,'f');
 
 
 //menu main_menu;
-user user1('f','c',80,1.75,'h');
+/*user user1('f','c',80,1.75,'h');
 user user2('b','q',90,1.90,'h');
 user user3('s','g',60,1.54,'f');
 user user4('g','d',120,1.85,'h');
-//user user5('b','l',70,1.86);
+//user user5('b','l',70,1.86);*/
 
 void setup() {
   setup_ESP();
   setup_WebServer();
   main_menu.menu_init();
-  main_menu.addPlayer(user1);
+  Michel->addConso();
+  Johnathane->addConso();
+  main_menu.addToList(Michel);
+  main_menu.addToList(Johnathane);
+  /*main_menu.addPlayer(user1);
   main_menu.addPlayer(user2);
   main_menu.addPlayer(user3);
   main_menu.addPlayer(user4);
@@ -25,7 +31,7 @@ void setup() {
   user2.addConso();
   //user2.addConso();
   user3.addConso();
-  user4.set_actual_grams(100);
+  user4.set_actual_grams(100);*/
 
 }
 
@@ -37,6 +43,9 @@ void loop() {
     main_menu.menu_display();
   } 
   else if (main_menu.get_m_level()==1){
+    main_menu.menu_display();
+  }
+  else if (main_menu.get_m_level()==2){
     main_menu.menu_display();
   }
   // put your main code here, to run repeatedly:
