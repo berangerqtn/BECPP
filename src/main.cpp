@@ -32,6 +32,7 @@ void loop() {
   updateList();
   if (digitalRead(Push)==1 && main_menu.get_m_level()==0){
     delay(300);
+    standby=false;
     main_menu.menu_display();
   } 
   else if (main_menu.get_m_level()==1){
@@ -40,7 +41,9 @@ void loop() {
   else if (main_menu.get_m_level()==2){
     main_menu.menu_display();
   }
-  // put your main code here, to run repeatedly:
+  if (standby)
+    lcd.print("Appuyez");
+
   /*if (WiFi.isConnected()){
     digitalWrite(PIN_LED_WIFI_CONNECTED, HIGH);
     //Serial.println("connecté");

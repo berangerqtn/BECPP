@@ -8,6 +8,8 @@
 #include "user.h"
 
 uint8_t ligne = 2;
+bool standby = true; // 1 = Veille :: 0 = LCD en marche 
+
 
 class menu{
     
@@ -71,13 +73,11 @@ void menu::menu_display(){
             }
             else if (1024/4<analogRead(Pot) && analogRead(Pot)<1024*2/4){
                 lcd.clear();
-                //lcd.print(m0[1]);
                 lcd.print(m0[1]);
                 delay(200);
             }
             else if (1024*2/4<analogRead(Pot) && analogRead(Pot)<1024*3/4) {
                 lcd.clear();
-                //lcd.print(m0[2]);
                 lcd.print(m0[2]);
                 delay(200);
             }
@@ -116,6 +116,7 @@ void menu::menu_display(){
                 //Serial.print("User Créé");
 
             }
+            standby=true;
             
         }
 
@@ -147,7 +148,7 @@ void menu::menu_display(){
                 computeGrams();
                 it++;
             }
-            
+            standby=true;            
         }
         
 
@@ -155,6 +156,11 @@ void menu::menu_display(){
             lcd.clear();
             m_level=1;
         }
+
+        else{
+            standby=true;
+        }
+
         lcd.setRGB(255,255,0);
     }
     
@@ -179,11 +185,11 @@ void menu::menu_display(){
             //Selection Utilisateur qui consomme.
             delay(100);
             m_level=2;
-            it = l_user.begin();
         }
         else{
             //RETOUR à m0
             m_level=0;
+            standby=true;
         }
     }
         
@@ -193,7 +199,8 @@ void menu::menu_display(){
             computeGrams();
             yield();
             delay(200);
-            
+            it = l_user.begin();
+
             while (digitalRead(Push)!= HIGH) {
                 yield();
                 delay(100);
@@ -238,6 +245,7 @@ void menu::menu_display(){
             delay(200);
         }
         delay(200);
+        standby=true;
     }
 }
 
@@ -331,12 +339,8 @@ float menu::set_height(){
 void menu::menu_init(){
     rgb_lcd lcd;
     lcd.begin(16,2);
-    lcd.print("begin LCD");
     lcd.setRGB(255,255,0);
-    lcd.print("setRGB LCD");
     lcd.clear();
-    lcd.print("Press Button");
-    //Serial.print("hello");
     delay(300);
 }
 
@@ -356,16 +360,6 @@ void menu::addToList(user*newU){
     l_user.push_back(newU);
 }
 
-/*void menu::addPlayer(user& u){
-    l_user.push_back(&u);
-}
-void menu::addPlayer(young& u){
-    l_user.push_back(&u);
-}
-
-void menu::addPlayer(expert& u){
-    l_user.push_back(&u);
-}*/
 void menu::computeGrams(){
   list<user*>::iterator it ;
   myList = main_menu.get_list();
