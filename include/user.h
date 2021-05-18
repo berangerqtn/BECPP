@@ -30,7 +30,8 @@ protected:
 public:
     user(char initial0, char initial1, int pweight, float pheight, char psexe);
     
-    //getters
+    //Getters
+
     char get_i0();
     char get_i1();
     int get_weight();
@@ -40,12 +41,15 @@ public:
     unsigned long get_time(){return time;};
     bool canHeDrive(){return (this->actual_grams)<(this->max_grams);};
 
-    //setters
+    //Setters
+
     void set_actual_grams(float g);
     void set_time(unsigned long mTime);
     virtual void addConso();
     void operator++();
-    //methods
+
+    //Methods
+
     void swap_users(user *ut);    
     bool operator > (user& right_user);
 };
@@ -139,10 +143,6 @@ void user::addConso()
 {
     if (sexe == 'f'){
         actual_grams+= DOSE/(weight*0.6);
-        Serial.println("Détail conso user: ");
-        Serial.println("Poids : ");
-        Serial.println(this->get_weight());
-        Serial.println(this->get_actual_grams());
     }
     else if (sexe == 'h'){
         actual_grams+= DOSE/(weight*0.7);
