@@ -17,4 +17,4 @@ Vous pouvez redéfinir les pins associés au potentiomètre et au bouton poussoi
 En revanche, nous vous recommandons de ne pas vous référer au noms des PINS inscrits sur la board. Il faut en réalité se référer au numéro de GPIO sur la datasheet du NodeMCU.
 
 ![GPIONodeMCU](./Pictures/NodeMCU.webp)
-
+[Retour à l'accueil](../readme.md)

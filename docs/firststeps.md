@@ -48,3 +48,5 @@ __IMPORTANT__ : Pour valider un ajojut de dose à un utilisateur il est importan
 
 ### Retour
 En cliquant sur le choix retour, vous retrouverez l'affichage précédent et vous pourrez ainsi revenir en arrière.
+
+[Retour à l'accueil](../readme.md)
