@@ -50,8 +50,10 @@ void loop() {
   else if (main_menu.get_m_level()==2){
     main_menu.menu_display();
   }
-  if (standby)
+  if (standby){
+    lcd.clear();
     lcd.print("Appuyez");
+  }
 
   /*if (WiFi.isConnected()){
     digitalWrite(PIN_LED_WIFI_CONNECTED, HIGH);
