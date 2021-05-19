@@ -44,23 +44,15 @@ const char index_html[] PROGMEM = R"=====(
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>LED Driver</title>
+        <title>SJC Project</title>
     </head>
     <body>
-        <h1>State of the LED</h1>
-        <h2>%LED%</h2>
+        <h1>Grammes Utilisateurs</h1>
         <h2>%personne 1%</h2>
         <h2>%personne 2%</h2>
         <h2>%personne 3%</h2>
         <h2>%personne 4%</h2>
 
-        <h1>LED Driver</h1>
-        <a href="/LED_ON">
-        <button>Turn the LED ON</button>
-        </a>
-        <a href="/LED_OFF">
-        <button>Turn the LED OFF</button>
-        </a>
         <a href="/updatelist">
         <button>Update List</button>
         </a>
@@ -76,8 +68,9 @@ void setup_ESP(){
   digitalWrite(LED_BUILTIN,HIGH);
   Serial.begin(9600);
   Serial.println("");
-  pinMode(5,INPUT);  
-  pinMode(16,OUTPUT);  
+  pinMode(5,OUTPUT);
+  pinMode(4,OUTPUT);
+  pinMode(16,INPUT);  
   pinMode(PIN_LED_WIFI_CONNECTED, OUTPUT);
   LED_OFF();
   

@@ -49,4 +49,14 @@ __IMPORTANT__ : Pour valider un ajojut de dose à un utilisateur il est importan
 ### Retour
 En cliquant sur le choix retour, vous retrouverez l'affichage précédent et vous pourrez ainsi revenir en arrière.
 
+### NB - Exceptions
+
+Si on compilant notre projet, et en le téléversant sur l'ESP, un reset improptu a lieu lors de l'ajout d'un 7ème utilisateur, cela vient du fait que les exceptions ne sont pas acceptées par l'ESP. Cela s'observe notamment en ouvrant le moniteur série, une série de code hexa apparait au moment de l'ajout.
+
+ Il faudra en effet modifier le fichier platformio-build.oy qui se trouve à ce niveau dans l'arborescence logique Windows 10 :
+
+    C:\Users\<user>\.platformio\packages\framework-arduinoespressif8266\tools\platformio-build.py
+
+Il faut y modifier l'occurence "stdc++" et la remplacer par "stdc++-exc". (Un brave Ctrl + F vous mènera très rapidement à la déclaration LIBS qui contient l'expression stdc++) N'hésitez pas à nous contacter si besoin est.
+
 [Retour à l'accueil](../readme.md)
