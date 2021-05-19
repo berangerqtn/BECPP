@@ -121,7 +121,9 @@ void menu::menu_display(){
                 }
             }
             catch(int n){
+                lcd.clear();
                 lcd.print("COVID : pas plus de 6");
+                delay(2000);
             }  
             standby=true;
             
