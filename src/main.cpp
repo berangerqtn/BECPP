@@ -51,7 +51,7 @@ void loop() {
     main_menu.menu_display();
   }
   if (standby)
-    lcd.print("Appuyez sur le bouton");
+    lcd.print("Appuyez");
 
   /*if (WiFi.isConnected()){
     digitalWrite(PIN_LED_WIFI_CONNECTED, HIGH);
