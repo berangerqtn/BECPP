@@ -57,8 +57,5 @@ void loop() {
     digitalWrite(PIN_LED_WIFI_CONNECTED, LOW);
     Serial.println("non connecté");
   }*/
-  //WebServer.on("/afficher_liste", afficherListe);
-   // WebServer.handleClient();
-   //computeGrams();
 
 }
