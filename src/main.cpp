@@ -23,17 +23,6 @@ void setup() {
   main_menu.addToList(Michelle);
   main_menu.addToList(Johnathan);
   main_menu.addToList(Michellle);
-
-  /*main_menu.addPlayer(user1);
-  main_menu.addPlayer(user2);
-  main_menu.addPlayer(user3);
-  main_menu.addPlayer(user4);
-  user1.set_actual_grams(1.2);
-  user2.addConso();
-  //user2.addConso();
-  user3.addConso();
-  user4.set_actual_grams(100);*/
-
 }
 
 void loop() {
