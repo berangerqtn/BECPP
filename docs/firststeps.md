@@ -1,7 +1,9 @@
 ![Logo](./logo/logo_large.png)
+[Retour à l'accueil](../readme.md)
+
 ## Premiers Pas
 ### Mise en place des composants
-Pour mettre en place l'appareil, il est nécessaire de mettre en place le cablâge électronique des différents composants. Nous vous recommandons de suivre les instructions d'[Assemblage électronique](elec.md).
+Pour mettre en place l'appareil, il est nécessaire de mettre en place le cablâge électronique des différents composants. Nous vous recommandons de suivre les instructions d'[Assemblage électronique](elec.md)
 
 ### Avant la compilation
 Ce projet a été mis en place via le module PlatformIO de VSCode, nous vous recommandons donc d'utiliser cet environnement de travail pour éditer et compiler le projet. 
