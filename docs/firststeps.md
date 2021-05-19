@@ -1,4 +1,4 @@
-# SJC Project
+![Logo](./logo/logo_large.png)
 ## Premiers Pas
 ##### Mise en place des composants
 Pour mettre en place l'appareil, il est nécessaire de mettre en place le cablâge électronique des différents composants. Nous vous recommandons de suivre les instructions d'[Assemblage électronique](elec.md).
