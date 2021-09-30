@@ -3,7 +3,7 @@
 ## Contexte
 Ce projet a été réalisé dans le cadre du cours **C++ et Programmation orientée objet** en 4ème année **Systèmes Embarqués** à l'**INSA Toulouse**. 
 
-L'idée de cet objet est d'informer les utilisateurs de leur état d'alcoolémie afin qu'ils puissent savoir si ils peuvent rentrer chez eux au volant, ou s'il est préférable de rester dormir sur place.
+L'idée de cet objet est d'informer les utilisateurs de leur état d'alcoolémie afin qu'ils puissent savoir si ils peuvent rentrer chez eux au volant, ou s'il est préférable de rester dormir sur place...
 
 ## Le concept 
 Rentrer ses initiales, son poids et sa taille via le potentiomètre et le bouton de validation de l'appareil, et sélectionner son profil à chaque fois que l'on consomme une boisson alcoolisée (dose bar).
